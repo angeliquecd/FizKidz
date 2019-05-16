@@ -1,4 +1,5 @@
-final float sunX;
+//final float sunX;
+//final float sunY;
 
 class Planets {
   float radius;
@@ -15,4 +16,10 @@ class Planets {
     xCor = mouseX;
     yCor = mouseY;
   }
+}
+
+void setup() {
+  size(600, 600);
+  fill(100);
+  circle(300, 300, 50);
 }
