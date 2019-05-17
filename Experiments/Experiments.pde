@@ -14,5 +14,6 @@ void draw() {
 }
 
 void mouseClicked() {
-  circle(mouseX, mouseY, 50);
+  float radius = (float)Math.random() * 100;
+  circle(mouseX, mouseY, radius);
 }
