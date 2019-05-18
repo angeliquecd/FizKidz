@@ -55,11 +55,12 @@ void setup() {
   toDisplay = new ArrayList<Displayable>();
   toMove = new ArrayList<Moveable>();
   Planet sun = new Planet(sunX, sunY, 100); 
-  sun.display();
+  toDisplay.add(sun);
 }
 
 
 void draw() {
+  background(255);
   for (Displayable x : toDisplay) { //displays all planets
     x.display();
   }
