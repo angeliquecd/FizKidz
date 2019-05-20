@@ -21,8 +21,9 @@ class Planet implements Displayable, Moveable {
   float spinradius;
   float centerx;
   float centery;
+  String name;
 
-  Planet(float x, float y, float rad) { //Planet class
+  Planet(float x, float y, float rad, String nm) { //Planet class
     radius = rad; //(float) Math.random() * 50;
     mass = radius * radius * PI * 5.51;
     xCor = x;
@@ -32,6 +33,7 @@ class Planet implements Displayable, Moveable {
     spinradius = (float)Math.sqrt((xCor - centerx)*(xCor - centerx) + (yCor - centery) * (yCor - centery)); //half of major axis of ellipse
     angle = 0;
     speed = random(-PI/180, PI/180); //to be determined by mass/force of gravity
+    name = nm;
 }
 
   void display() {
@@ -54,7 +56,7 @@ void setup() {
   fill(255, 255, 0);
   toDisplay = new ArrayList<Displayable>();
   toMove = new ArrayList<Moveable>();
-  Planet sun = new Planet(sunX, sunY, 100); 
+  Planet sun = new Planet(sunX, sunY, 100, "Sun"); 
   toDisplay.add(sun);
 }
 
@@ -71,7 +73,7 @@ void draw() {
 }
 
 void mouseClicked() {
-  Planet p = new Planet(mouseX, mouseY, (float)Math.random()*100); //adds new planet with random radius
+  Planet p = new Planet(mouseX, mouseY, (float)Math.random()*100, "NAME"); //adds new planet with random radius
   toDisplay.add(p);
   toMove.add(p);
 }
