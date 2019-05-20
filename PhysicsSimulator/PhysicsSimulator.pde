@@ -67,6 +67,10 @@ class Planet implements Displayable, Moveable {
   void setE(float ecc) {
     e = ecc;
   }
+  
+  void findXY(float ecc){
+  }
+  
 }
 
 
@@ -74,7 +78,7 @@ ArrayList<Displayable> toDisplay;
 ArrayList<Moveable> toMove;
 
 void setup() {
-  size(600, 600);
+  size(1200, 1200);
   fill(255, 255, 0);
   toDisplay = new ArrayList<Displayable>();
   toMove = new ArrayList<Moveable>();
@@ -97,7 +101,8 @@ void draw() {
 void mouseClicked() {
   Planet p = new Planet(mouseX, mouseY, (float)Math.random()*100, "NAME"); //adds new planet with random radius
   if (mercury) {
-    p.setName();
+    p.setName("Mercury");
+    p.setE(.206);
   }
   toDisplay.add(p);
   toMove.add(p);
