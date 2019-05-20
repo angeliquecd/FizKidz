@@ -1,5 +1,18 @@
 final float sunX = 300;
 final float sunY = 300;
+boolean sun = true;
+boolean mercury = false;
+boolean venus = false;
+boolean earth = false;
+boolean mars = false;
+boolean jupiter = false;
+boolean saturn = false;
+boolean uranus = false;
+boolean neptune = false;
+boolean pluto = false;
+
+
+
 import java.util.*;
 ArrayList<Planet> planets = new ArrayList<Planet>(); //keep track of all planets
 
@@ -22,6 +35,7 @@ class Planet implements Displayable, Moveable {
   float centerx;
   float centery;
   String name;
+  float e;
 
   Planet(float x, float y, float rad, String nm) { //Planet class
     radius = rad; //(float) Math.random() * 50;
@@ -44,6 +58,14 @@ class Planet implements Displayable, Moveable {
     angle += speed;
     xCor = sin(angle) * spinradius + centerx; 
     yCor = cos(angle) * spinradius + centery;
+  }
+  
+  void setName(String nm){
+    name = nm;
+  }
+  
+  void setE(float ecc) {
+    e = ecc;
   }
 }
 
@@ -74,6 +96,22 @@ void draw() {
 
 void mouseClicked() {
   Planet p = new Planet(mouseX, mouseY, (float)Math.random()*100, "NAME"); //adds new planet with random radius
+  if (mercury) {
+    p.setName();
+  }
   toDisplay.add(p);
   toMove.add(p);
+}
+
+void keyPressed() {
+  if (key == '1') mercury = true;
+  if(key == '2') venus = true;
+  if(key == '3') earth = true;
+  if(key == '4') mars = true;
+  if(key == '5') jupiter = true;
+  if(key == '6') saturn = true;
+  if(key == '7') uranus = true;
+  if(key == '8') neptune = true;
+  if(key == '9') pluto = true;
+  
 }
