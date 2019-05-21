@@ -69,7 +69,16 @@ class Planet implements Displayable, Moveable {
   }
 
   void findXY(float ecc) {
-    double radius = Math.sqrt((sunX+xCor)*(sunX+xCor) + (sunY+yCor)*(sunY+yCor)) * ecc;
+    float radius = (float) Math.sqrt((sunX+xCor)*(sunX+xCor) + (sunY+yCor)*(sunY+yCor));
+    //radius *= radius;
+    //float partition= radius/(ecc+1);
+    float a = radius/(ecc+1);
+    float partition= a/radius;
+  //  float b = partition;
+    float c=ecc;
+    centerx = sunX + partition*(xCor-sunX);
+    centery= sunY+partition*(yCor-sunY);
+    //ellipse(centerx,centery,20,20);
   }
 }
 
