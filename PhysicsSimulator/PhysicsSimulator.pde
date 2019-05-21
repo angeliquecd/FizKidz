@@ -1,5 +1,5 @@
-final float sunX = 300;
-final float sunY = 300;
+final float sunX = 0;
+final float sunY = 0;
 boolean sun = true;
 boolean mercury = false;
 boolean venus = false;
@@ -21,7 +21,7 @@ interface Displayable {
 }
 
 interface Moveable {
- void move(); 
+  void move();
 }
 
 class Planet implements Displayable, Moveable {
@@ -48,7 +48,7 @@ class Planet implements Displayable, Moveable {
     angle = 0;
     speed = random(-PI/180, PI/180); //to be determined by mass/force of gravity
     name = nm;
-}
+  }
 
   void display() {
     circle(xCor, yCor, radius);
@@ -59,18 +59,18 @@ class Planet implements Displayable, Moveable {
     xCor = sin(angle) * spinradius + centerx; 
     yCor = cos(angle) * spinradius + centery;
   }
-  
-  void setName(String nm){
+
+  void setName(String nm) {
     name = nm;
   }
-  
+
   void setE(float ecc) {
     e = ecc;
   }
-  
-  void findXY(float ecc){
+
+  void findXY(float ecc) {
+    double radius = Math.sqrt((sunX+xCor)*(sunX+xCor) + (sunY+yCor)*(sunY+yCor)) * ecc;
   }
-  
 }
 
 
@@ -78,7 +78,8 @@ ArrayList<Displayable> toDisplay;
 ArrayList<Moveable> toMove;
 
 void setup() {
-  size(1200, 1200);
+  size(1000, 700);
+  pushMatrix();
   fill(255, 255, 0);
   toDisplay = new ArrayList<Displayable>();
   toMove = new ArrayList<Moveable>();
@@ -89,12 +90,13 @@ void setup() {
 
 void draw() {
   background(255);
+  translate(width/2, height/2);
   for (Displayable x : toDisplay) { //displays all planets
     x.display();
   }
-  
+
   for (Moveable x : toMove) {
-   x.move(); 
+    x.move();
   }
 }
 
@@ -110,13 +112,12 @@ void mouseClicked() {
 
 void keyPressed() {
   if (key == '1') mercury = true;
-  if(key == '2') venus = true;
-  if(key == '3') earth = true;
-  if(key == '4') mars = true;
-  if(key == '5') jupiter = true;
-  if(key == '6') saturn = true;
-  if(key == '7') uranus = true;
-  if(key == '8') neptune = true;
-  if(key == '9') pluto = true;
-  
+  if (key == '2') venus = true;
+  if (key == '3') earth = true;
+  if (key == '4') mars = true;
+  if (key == '5') jupiter = true;
+  if (key == '6') saturn = true;
+  if (key == '7') uranus = true;
+  if (key == '8') neptune = true;
+  if (key == '9') pluto = true;
 }
