@@ -71,13 +71,13 @@ class Planet implements Displayable, Moveable {
   }
 
   void findXY(float ecc) {
-    float radius = (float) Math.sqrt((sunX+xCor)*(sunX+xCor) + (sunY+yCor)*(sunY+yCor));
+    float radius = (float) Math.sqrt((sunX-xCor)*(sunX-xCor) + (sunY-yCor)*(sunY-yCor));
     //radius *= radius;
     //float partition= radius/(ecc+1);
     float a = radius/(ecc+1);
-    float partition= a/radius;
+    float partition= ecc*a/radius;
   //  float b = partition;
-    float c=ecc;
+    //float c=ecc;
     centerx = sunX + partition*(xCor-sunX);
     centery= sunY+partition*(yCor-sunY);
     //ellipse(centerx,centery,20,20);
@@ -89,7 +89,7 @@ ArrayList<Displayable> toDisplay;
 ArrayList<Moveable> toMove;
 
 void setup() {
-  size(600, 600);
+  size(1000, 1000);
   pushMatrix();
   fill(255, 255, 0);
   toDisplay = new ArrayList<Displayable>();
@@ -103,7 +103,7 @@ void setup() {
 void draw() {
   background(255);
   fill(0,0,0);
-  mode="CUSTOM";
+  //mode="CUSTOM";
   if (mode=="CHOOSING"){
     text("Select one of the keys to pick a planet: ",10,20);
     text("1: Earth",10,40);
