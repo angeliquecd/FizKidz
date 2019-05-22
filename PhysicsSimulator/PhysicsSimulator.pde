@@ -10,7 +10,8 @@ boolean saturn = false;
 boolean uranus = false;
 boolean neptune = false;
 boolean pluto = false;
-
+boolean custom = true;
+String mode= "CHOOSING";
 
 
 import java.util.*;
@@ -51,6 +52,7 @@ class Planet implements Displayable, Moveable {
   }
 
   void display() {
+    fill(255,255,0);
     circle(xCor, yCor, radius);
   }
 
@@ -87,18 +89,36 @@ ArrayList<Displayable> toDisplay;
 ArrayList<Moveable> toMove;
 
 void setup() {
-  size(1000, 700);
+  size(600, 600);
   pushMatrix();
   fill(255, 255, 0);
   toDisplay = new ArrayList<Displayable>();
   toMove = new ArrayList<Moveable>();
   Planet sun = new Planet(sunX, sunY, 100, "Sun"); 
   toDisplay.add(sun);
+
 }
 
 
 void draw() {
   background(255);
+  if (mode=="CHOOSING"){
+    fill(0,0,0);
+    text("Select one of the keys to pick a planet: ",10,20);
+    text("1: Earth",10,40);
+     text("2: Jupiter",10,60);
+     text("3: Mars",10,80);
+     text("4: Neptune",10,100);
+     text("5: Saturn",10,120);
+     text("6: Uranus",10,140);
+     text("7: Venus",10,160);
+      text("8: Mercury",10,180);
+     text("9: Create your own",10,200);
+  }    
+  if (mode=="CHOSEN"){
+    text("Drop the planet by clicking",10,20);
+    triangle(mouseX,mouseY,mouseX+10,mouseY+10,mouseX+20,mouseY);
+  }
   translate(width/2, height/2);
   for (Displayable x : toDisplay) { //displays all planets
     x.display();
@@ -117,16 +137,19 @@ void mouseClicked() {
   }
   toDisplay.add(p);
   toMove.add(p);
+  mode="CHOOSING";
 }
 
 void keyPressed() {
-  if (key == '1') mercury = true;
-  if (key == '2') venus = true;
-  if (key == '3') earth = true;
-  if (key == '4') mars = true;
-  if (key == '5') jupiter = true;
-  if (key == '6') saturn = true;
-  if (key == '7') uranus = true;
-  if (key == '8') neptune = true;
-  if (key == '9') pluto = true;
+  if (key == '1') earth = true;
+  if (key == '2') jupiter = true;
+  if (key == '3') mars = true;
+  if (key == '4') neptune = true;
+  if (key == '5') saturn = true;
+  if (key == '6') uranus = true;
+  if (key == '7') venus = true;
+  if (key == '8') mercury = true;
+  if (key == '9') custom = true;
+  mode="CHOSEN";
+  if (key == '9') mode= "CHOSEN2";
 }
