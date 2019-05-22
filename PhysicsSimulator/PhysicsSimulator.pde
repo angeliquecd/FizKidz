@@ -32,11 +32,13 @@ class Planet implements Displayable, Moveable {
   float mass;
   float angle;
   float speed;
-  float spinradius;
+  float a;
   float centerx;
   float centery;
   String name;
   float e;
+  float b;
+  float c;
 
   Planet(float x, float y, float rad, String nm) { //Planet class
     radius = rad; //(float) Math.random() * 50;
@@ -45,22 +47,26 @@ class Planet implements Displayable, Moveable {
     yCor = y;
     centerx = xCor - 2 * sunX; //I don't think these coordinates for center of ellipse are right
     centery = yCor - 2 * sunY;
-    spinradius = (float)Math.sqrt((xCor - centerx)*(xCor - centerx) + (yCor - centery) * (yCor - centery)); //half of major axis of ellipse
+    a = (float) Math.sqrt((sunX-xCor)*(sunX-xCor) + (sunY-yCor)*(sunY-yCor)) / (1+e); //half of major axis of ellipse
     angle = 0;
     speed = random(-PI/180, PI/180); //to be determined by mass/force of gravity
     name = nm;
+    c = e/a;
+    b = (float)Math.sqrt(a*a - c*c);
   }
 
   void display() {
     fill(255,255,0);
     circle(xCor, yCor, radius);
-    drawGrid();
+    ellipseMODE(CORNERS)
+    ellipse(,mouseX,mouseY+b,)
+    //drawGrid();
   }
 
   void move() { //will determine elliptical motion of each planet
     angle += speed;
-    xCor = sin(angle) * spinradius + centerx; 
-    yCor = cos(angle) * spinradius + centery;
+    xCor = sin(angle) * a + sunX; 
+    yCor = cos(angle) * b + sunY;
   }
 
   void setName(String nm) {
@@ -97,7 +103,7 @@ void drawGrid(){
   }
 void setup() {
   size(1000, 1000);
-  pushMatrix();
+  //pushMatrix();
   fill(255, 255, 0);
   toDisplay = new ArrayList<Displayable>();
   toMove = new ArrayList<Moveable>();
