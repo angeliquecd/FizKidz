@@ -1,5 +1,5 @@
-final float sunX = 0;
-final float sunY = 0;
+final float sunX = width/2;
+final float sunY = height/2;
 boolean sun = true;
 boolean mercury = false;
 boolean venus = false;
@@ -90,7 +90,7 @@ ArrayList<Moveable> toMove;
 
 void setup() {
   size(1000, 1000);
-  pushMatrix();
+  //pushMatrix();
   fill(255, 255, 0);
   toDisplay = new ArrayList<Displayable>();
   toMove = new ArrayList<Moveable>();
@@ -133,7 +133,7 @@ void draw() {
     triangle(45,180,75,180,60,210);
     text ("Mass is: "+ massy +" kg", 10,240);
   }
-  translate(width/2, height/2);
+  //translate(width/2, height/2);
   for (Displayable x : toDisplay) { //displays all planets
     x.display();
   }
