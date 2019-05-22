@@ -45,7 +45,7 @@ class Planet implements Displayable, Moveable {
     yCor = y;
     centerx = xCor - 2 * sunX; //I don't think these coordinates for center of ellipse are right
     centery = yCor - 2 * sunY;
-    spinradius = (float)Math.sqrt((xCor - centerx)*(xCor - centerx) + (yCor - centery) * (yCor - centery)); //half of major axis of ellipse
+    spinradius = (float) Math.sqrt((sunX-xCor)*(sunX-xCor) + (sunY-yCor)*(sunY-yCor)) / (1+e); //half of major axis of ellipse
     angle = 0;
     speed = random(-PI/180, PI/180); //to be determined by mass/force of gravity
     name = nm;
