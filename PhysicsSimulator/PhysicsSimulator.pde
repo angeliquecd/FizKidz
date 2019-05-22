@@ -1,5 +1,5 @@
-final float sunX = 0;
-final float sunY = 0;
+final float sunX = 500;
+final float sunY = 500;
 boolean sun = true;
 boolean mercury = false;
 boolean venus = false;
@@ -54,6 +54,7 @@ class Planet implements Displayable, Moveable {
   void display() {
     fill(255,255,0);
     circle(xCor, yCor, radius);
+    drawGrid();
   }
 
   void move() { //will determine elliptical motion of each planet
@@ -87,14 +88,21 @@ class Planet implements Displayable, Moveable {
 
 ArrayList<Displayable> toDisplay;
 ArrayList<Moveable> toMove;
-
+void drawGrid(){
+    for (int x =0;x<width;x+=10){
+      fill(0,0,0);
+      line(x,0,x,1000);
+      line(0,x,1000,x);}
+    
+  }
 void setup() {
   size(1000, 1000);
   pushMatrix();
   fill(255, 255, 0);
   toDisplay = new ArrayList<Displayable>();
   toMove = new ArrayList<Moveable>();
-  Planet sun = new Planet(sunX, sunY, 100, "Sun"); 
+  Planet sun = new Planet(sunX, sunY, 100, "Sun");
+  drawGrid();
   toDisplay.add(sun);
 
 }
@@ -133,7 +141,7 @@ void draw() {
     triangle(45,180,75,180,60,210);
     text ("Mass is: "+ massy +" kg", 10,240);
   }
-  translate(width/2, height/2);
+  //translate(width/2, height/2);
   for (Displayable x : toDisplay) { //displays all planets
     x.display();
   }
