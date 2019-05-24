@@ -84,7 +84,7 @@ void draw() {
 
 void mouseClicked() {
   if (mode=="CHOSEN") {
-    Planet p = new Planet(mouseX, mouseY, (float)Math.random()*100, "NAME"); //adds new planet with random radius
+    Planet p = new Planet(mouseX, mouseY, (float)Math.random()*50, "NAME"); //adds new planet with random radius
     if (mercury) {
       p.setName("Mercury");
       p.setE(.206);

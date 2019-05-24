@@ -27,11 +27,6 @@ class Planet implements Displayable, Moveable {
     b = (float)Math.sqrt(a*a - c*c);
     centerx = sunX + (c/(a+c))*(xCor - sunX);
     centery = sunY + (c/(a+c))*(yCor - sunY);
-    println(sunX);
-    println(sunY);
-    println(centerx);
-    println(centery);
-    
   }
 
   void display() {
@@ -53,16 +48,4 @@ class Planet implements Displayable, Moveable {
     e = ecc;
   }
 
-  void findXY() {
-    //float radius = (float) Math.sqrt((sunX-xCor)*(sunX-xCor) + (sunY-yCor)*(sunY-yCor));
-    //radius *= radius;
-    //float partition= radius/(ecc+1);
-    //float a = radius/(e+1);
-    float partition= c/(a+c);
-    //  float b = partition;
-    //float c=ecc;
-    centerx = sunX + partition*(xCor-sunX);
-    centery= sunY+partition*(yCor-sunY);
-    //ellipse(centerx,centery,20,20);
-  }
 }
