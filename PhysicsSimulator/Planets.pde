@@ -14,18 +14,19 @@ class Planet implements Displayable, Moveable {
   float c;
 
   Planet(float x, float y, float rad, String nm) { //Planet class
-    radius = rad; //(float) Math.random() * 50;
+    e=.77;
+    radius = rad; 
     mass = radius * radius * PI * 5.51;
     xCor = x;
     yCor = y;
-    centerx = xCor - 2 * sunX; //I don't think these coordinates for center of ellipse are right
-    centery = yCor - 2 * sunY;
     a = (float) Math.sqrt((sunX-xCor)*(sunX-xCor) + (sunY-yCor)*(sunY-yCor)) / (1+e); //half of major axis of ellipse
-    angle = 0;
+    angle = 0; 
     speed = random(-PI/180, PI/180); //to be determined by mass/force of gravity
     name = nm;
     c = e/a;
     b = (float)Math.sqrt(a*a - c*c);
+    centerx = sunX + (c/(a+c))*(xCor - sunX);
+    centery = sunY + (c/(a+c))*(yCor - sunY);
   }
 
   void display() {
@@ -35,9 +36,9 @@ class Planet implements Displayable, Moveable {
 
   void move() { //will determine elliptical motion of each planet
     angle += speed;
-    xCor = sin(angle) * a + sunX; 
-    yCor = cos(angle) * b + sunY;
-  }
+    xCor = sin(angle) * a + centerx; 
+    yCor = cos(angle) * b + centery;
+  } 
 
   void setName(String nm) {
     name = nm;
@@ -47,12 +48,12 @@ class Planet implements Displayable, Moveable {
     e = ecc;
   }
 
-  void findXY(float ecc) {
-    float radius = (float) Math.sqrt((sunX-xCor)*(sunX-xCor) + (sunY-yCor)*(sunY-yCor));
+  void findXY() {
+    //float radius = (float) Math.sqrt((sunX-xCor)*(sunX-xCor) + (sunY-yCor)*(sunY-yCor));
     //radius *= radius;
     //float partition= radius/(ecc+1);
-    float a = radius/(ecc+1);
-    float partition= ecc*a/radius;
+    //float a = radius/(e+1);
+    float partition= c/(a+c);
     //  float b = partition;
     //float c=ecc;
     centerx = sunX + partition*(xCor-sunX);

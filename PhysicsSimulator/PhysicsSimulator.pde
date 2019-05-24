@@ -25,7 +25,6 @@ interface Moveable {
   void move();
 }
 
-
 ArrayList<Displayable> toDisplay;
 ArrayList<Moveable> toMove;
 
