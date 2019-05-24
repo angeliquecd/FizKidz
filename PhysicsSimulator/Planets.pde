@@ -13,8 +13,8 @@ class Planet implements Displayable, Moveable {
   float b;
   float c;
 
-  Planet(float x, float y, float rad, String nm) { //Planet class
-    e=.57;
+  Planet(float x, float y, float rad, String nm, float ecc) { //Planet class
+    e=ecc;
     radius = rad; 
     mass = radius * radius * PI * 5.51;
     xCor = x;
