@@ -14,19 +14,24 @@ class Planet implements Displayable, Moveable {
   float c;
 
   Planet(float x, float y, float rad, String nm) { //Planet class
-    e=.77;
+    e=.57;
     radius = rad; 
     mass = radius * radius * PI * 5.51;
     xCor = x;
     yCor = y;
     a = (float) Math.sqrt((sunX-xCor)*(sunX-xCor) + (sunY-yCor)*(sunY-yCor)) / (1+e); //half of major axis of ellipse
     angle = 0; 
-    speed = random(-PI/180, PI/180); //to be determined by mass/force of gravity
+    speed = PI/180;//random(-PI/180, PI/180); //to be determined by mass/force of gravity
     name = nm;
-    c = e/a;
+    c = e*a;
     b = (float)Math.sqrt(a*a - c*c);
     centerx = sunX + (c/(a+c))*(xCor - sunX);
     centery = sunY + (c/(a+c))*(yCor - sunY);
+    println(sunX);
+    println(sunY);
+    println(centerx);
+    println(centery);
+    
   }
 
   void display() {
