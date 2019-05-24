@@ -13,7 +13,7 @@ boolean pluto = false;
 boolean custom = true;
 String mode= "CHOOSING";
 int massy =0;
-
+int radiussy =0;
 import java.util.*;
 ArrayList<Planet> planets = new ArrayList<Planet>(); //keep track of all planets
 
@@ -49,6 +49,7 @@ void setup() {
 void draw() {
   background(255);
   fill(0, 0, 0);
+  println(mode);
   //mode="CUSTOM";
   if (mode=="CHOOSING") {
     text("Select one of the keys to pick a planet: ", 10, 20);
@@ -66,9 +67,18 @@ void draw() {
     text("Drop the planet by clicking the desired location", 10, 20);
     triangle(mouseX, mouseY, mouseX+10, mouseY+10, mouseX+20, mouseY);
   }
-  if (mode=="CUSTOM") {
+  if (mode=="CUSTOM" || mode == "CUSTOM2") {
+    if (mode=="CUSTOM"){
     text("Set the mass of the planet by clicking the up-down arrows", 10, 20);
-    text("Hit enter once you've selected your mass", 10, 30);
+    text("Hit enter once you've selected your mass", 10, 40);
+        text ("Mass is: "+ massy +" kg", 10, 240);
+    }
+        if (mode=="CUSTOM2"){
+      text("Set the radius of the planet by clicking the up-down arrows", 10, 20);
+    text("Hit enter once you've selected your radius", 10, 40);
+    text ("Radius is: "+ radiussy +" km", 10, 240);
+  }
+    
     fill(255);
     rect(10, 100, 110, 60);
     fill (0, 0, 0);
@@ -77,7 +87,6 @@ void draw() {
     rect(10, 160, 110, 60);
     fill(0, 0, 0);
     triangle(45, 180, 75, 180, 60, 210);
-    text ("Mass is: "+ massy +" kg", 10, 240);
   }
   //translate(width/2, height/2);
   for (Displayable x : toDisplay) { //displays all planets
@@ -100,12 +109,14 @@ void mouseClicked() {
     toMove.add(p);
     mode="CHOOSING";
   }
-  if (mode=="CUSTOM") {
+  if (mode=="CUSTOM" || mode == "CUSTOM2") {
     if (mouseX>10 && mouseY>100 && mouseX<120 && mouseY<160) {
-      massy+=10;
+      if (mode=="CUSTOM") massy+=10;
+      else radiussy+=10;
     }
     if (mouseX>10 && mouseY>160 && mouseX<120 && mouseY<220) {
-      massy-=10;
+      if (mode == "CUSTOM" && massy>0) massy-=10;
+      else if (radiussy>0) radiussy-=10;
     }
   }
 }
@@ -120,7 +131,7 @@ void keyPressed() {
   if (key == '7') venus = true;
   if (key == '8') mercury = true;
   if (key == '9') custom = true;
-  mode="CHOSEN";
+  if (mode=="CHOOSING") mode="CHOSEN";
   if (key == '9') mode= "CUSTOM";
   if (mode=="CUSTOM") {
     if (keyCode==ENTER) {
