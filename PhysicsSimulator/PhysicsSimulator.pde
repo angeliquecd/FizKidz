@@ -40,7 +40,7 @@ void setup() {
   fill(255, 255, 0);
   toDisplay = new ArrayList<Displayable>();
   toMove = new ArrayList<Moveable>();
-  Planet sun = new Planet(sunX, sunY, 100, "Sun", 1);
+  Planet sun = new Planet(sunX, sunY, 100, "Sun", 1, 0);
   drawGrid();
   toDisplay.add(sun);
 }
@@ -49,7 +49,7 @@ void setup() {
 void draw() {
   background(255);
   fill(0, 0, 0);
-  println(mode);
+  //println(mode);
   //mode="CUSTOM";
   if (mode=="CHOOSING") {
     text("Select one of the keys to pick a planet: ", 10, 20);
@@ -101,36 +101,43 @@ void draw() {
 
 void mouseClicked() {
   if (mode=="CHOSEN") {
-    Planet p = new Planet(mouseX, mouseY, (float)Math.random()*50, "Venus", .206);
+    Planet p = new Planet(mouseX, mouseY, (float)Math.random()*50, "Venus", .206, 45);
     if (mercury) {
-      p = new Planet(mouseX, mouseY, (float)Math.random()*50, "Mercury", .206);
+      p = new Planet(mouseX, mouseY, (float)Math.random()*50, "Mercury", .206, .241);
+      mercury = false;
     }
     else if(venus) {
-      p = new Planet(mouseX, mouseY, (float)Math.random()*50, "Venus", .0068);
+      p = new Planet(mouseX, mouseY, (float)Math.random()*50, "Venus", .0068, .615);
+      venus = false;
     }
     else if(earth) {
-      p = new Planet(mouseX, mouseY, (float)Math.random()*50, "Earth", .0167);
+      p = new Planet(mouseX, mouseY, (float)Math.random()*50, "Earth", .0167, 1);
+      earth = false;
     }
     else if(mars) {
-      p = new Planet(mouseX, mouseY, (float)Math.random()*50, "Mars", .0934);
+      p = new Planet(mouseX, mouseY, (float)Math.random()*50, "Mars", .0934, 1.88);
+      mars = false;
     }
     else if(jupiter) {
-      p = new Planet(mouseX, mouseY, (float)Math.random()*50, "Jupiter", .0485);
+      p = new Planet(mouseX, mouseY, (float)Math.random()*50, "Jupiter", .0485, 11.9);
+      jupiter = false;
     }
     else if(saturn) {
-      p = new Planet(mouseX, mouseY, (float)Math.random()*50, "Saturn", .0556);
+      p = new Planet(mouseX, mouseY, (float)Math.random()*50, "Saturn", .0556, 29.5);
+      saturn = false;
     }
     else if(uranus) {
-      p = new Planet(mouseX, mouseY, (float)Math.random()*50, "Uranus", .0472);
+      p = new Planet(mouseX, mouseY, (float)Math.random()*50, "Uranus", .0472, 84);
+      uranus = false;
     }
     else if(neptune) {
-      p = new Planet(mouseX, mouseY, (float)Math.random()*50, "Neptune", .0086);
+      p = new Planet(mouseX, mouseY, (float)Math.random()*50, "Neptune", .0086, 165);
     }
     else if(pluto) {
-      p = new Planet(mouseX, mouseY, (float)Math.random()*50, "Pluto", .25);
+      p = new Planet(mouseX, mouseY, (float)Math.random()*50, "Pluto", .25, 248);
     }
     else {
-      p = new Planet(mouseX, mouseY, (float)Math.random()*50, "Custom", .206);
+      p = new Planet(mouseX, mouseY, (float)Math.random()*50, "Custom", .206, 45); //have to choose interactively
     }
     toDisplay.add(p);
     toMove.add(p);
