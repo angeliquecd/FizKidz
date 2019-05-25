@@ -106,28 +106,28 @@ void mouseClicked() {
       p = new Planet(mouseX, mouseY, (float)Math.random()*50, "Mercury", .206);
     }
     else if(venus) {
-      p = new Planet(mouseX, mouseY, (float)Math.random()*50, "Venus", .206);
+      p = new Planet(mouseX, mouseY, (float)Math.random()*50, "Venus", .0068);
     }
     else if(earth) {
-      p = new Planet(mouseX, mouseY, (float)Math.random()*50, "Earth", .206);
+      p = new Planet(mouseX, mouseY, (float)Math.random()*50, "Earth", .0167);
     }
     else if(mars) {
-      p = new Planet(mouseX, mouseY, (float)Math.random()*50, "Mars", .206);
+      p = new Planet(mouseX, mouseY, (float)Math.random()*50, "Mars", .0934);
     }
     else if(jupiter) {
-      p = new Planet(mouseX, mouseY, (float)Math.random()*50, "Jupiter", .206);
+      p = new Planet(mouseX, mouseY, (float)Math.random()*50, "Jupiter", .0485);
     }
     else if(saturn) {
-      p = new Planet(mouseX, mouseY, (float)Math.random()*50, "Saturn", .206);
+      p = new Planet(mouseX, mouseY, (float)Math.random()*50, "Saturn", .0556);
     }
     else if(uranus) {
-      p = new Planet(mouseX, mouseY, (float)Math.random()*50, "Uranus", .206);
+      p = new Planet(mouseX, mouseY, (float)Math.random()*50, "Uranus", .0472);
     }
     else if(neptune) {
-      p = new Planet(mouseX, mouseY, (float)Math.random()*50, "Neptune", .206);
+      p = new Planet(mouseX, mouseY, (float)Math.random()*50, "Neptune", .0086);
     }
     else if(pluto) {
-      p = new Planet(mouseX, mouseY, (float)Math.random()*50, "Pluto", .206);
+      p = new Planet(mouseX, mouseY, (float)Math.random()*50, "Pluto", .25);
     }
     else {
       p = new Planet(mouseX, mouseY, (float)Math.random()*50, "Custom", .206);
