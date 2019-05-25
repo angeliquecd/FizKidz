@@ -1,5 +1,6 @@
 final float sunX = 500;
 final float sunY = 500;
+final float G = 667.408;
 boolean sun = true;
 boolean mercury = false;
 boolean venus = false;
