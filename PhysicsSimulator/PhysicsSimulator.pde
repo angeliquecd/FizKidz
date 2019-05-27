@@ -12,6 +12,7 @@ boolean uranus = false;
 boolean neptune = false;
 boolean pluto = false;
 boolean custom = true;
+String simMode = "MENU";
 String mode= "CHOOSING";
 int massy =0;
 int radiussy =0;
@@ -37,21 +38,24 @@ void drawGrid() {
 }
 void setup() {
   size(1000, 800);
-  background(255);
+  //background(255);
   //pushMatrix();
   toDisplay = new ArrayList<Displayable>();
   toMove = new ArrayList<Moveable>();
   //drawGrid();
-  mode = "MENU";
 }
 
 
 void draw() {
-  println(mode);
-  if (mode.equals("MENU")) {
+  println(simMode);
+  if (simMode.equals("MENU")) {
+    background(255);
     displayMenu();
   }
-  if (mode.equals("ORBIT")) {
+  if (simMode.equals("ORBIT")) {
+    background(255);
+    Planet sun = new Planet(sunX, sunY, 100, "Sun", 1, 0);
+    toDisplay.add(sun);
     displayOrbit();
   }
   for (Displayable x : toDisplay) { //displays all the things
@@ -73,12 +77,8 @@ void displayMenu() {
 }
 
 void displayOrbit() {
-  background(255);
-  mode = "CHOOSING";
   //fill(0, 0, 0);
   //fill(255, 255, 0);
-  Planet sun = new Planet(sunX, sunY, 100, "Sun", 1, 0);
-  toDisplay.add(sun);
   textSize(14);
   fill(0);
   if (mode.equals("CHOOSING")) {
@@ -93,6 +93,7 @@ void displayOrbit() {
     text("7: Neptune", 10, 180);
     text("8: Pluto", 10, 200);
     text("9: Create your own", 10, 220);
+    //mode = "CHOSEN";
   }    
   if (mode.equals("CHOSEN")) {
     text("Drop the planet by clicking the desired location", 10, 20);
@@ -165,9 +166,9 @@ void mouseClicked() {
       else if (radiussy>0) radiussy-=10;
     }
   }
-  if (mode.equals("MENU")) {
+  if (simMode.equals("MENU")) {
     if (mouseX> width/2-200 && mouseX < width/2+200 && mouseY > height/2-200 && mouseY < height/2-100) {
-      mode="ORBIT";
+      simMode="ORBIT";
     }
   }
 }
