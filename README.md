@@ -20,4 +20,4 @@
 *Fixed issues with elliptical orbit. Decided to make a collideable function for when planets collide with the sun, tried to figure out how to fix bug of planets not going to the right place.*
 
 **Weekend 5/25 - 5/27:**
-*We updated the orbital motion of the planets to take into account their mass/size and starting position relative to the sun. We also added a menu screen and worked to debug several issues: mode not changing to "CHOSEN" in the planet simulation and the features that go with this mode not showing up.*
+*We updated the orbital motion of the planets to take into account their mass/size and starting position relative to the sun. We also added a menu screen and worked to debug several issues: mode not changing to "CHOSEN" in the planet simulation and the features that go with this mode not showing up, and the issue where the planets moved with multiple copies instead of just one planet orbiting the sun.*
