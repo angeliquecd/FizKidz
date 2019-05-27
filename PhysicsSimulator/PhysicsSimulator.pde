@@ -47,13 +47,12 @@ void setup() {
 
 
 void draw() {
+  background(255);
   println(simMode);
   if (simMode.equals("MENU")) {
-    background(255);
     displayMenu();
   }
   if (simMode.equals("ORBIT")) {
-    background(255);
     Planet sun = new Planet(sunX, sunY, 100, "Sun", 1, 0);
     toDisplay.add(sun);
     displayOrbit();
