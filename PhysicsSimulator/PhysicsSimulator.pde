@@ -42,16 +42,24 @@ void setup() {
   toDisplay = new ArrayList<Displayable>();
   toMove = new ArrayList<Moveable>();
   //drawGrid();
+  mode = "MENU";
 }
 
 
 void draw() {
-  displayMenu();
+  println(mode);
+  if (mode.equals("MENU")) {
+    displayMenu();
+  }
   if (mode.equals("ORBIT")) {
+    background(255);
     fill(0, 0, 0);
     fill(255, 255, 0);
     Planet sun = new Planet(sunX, sunY, 100, "Sun", 1, 0);
     toDisplay.add(sun);
+    mode = "CHOOSING";
+    textSize(14);
+    fill(0);
     //println(mode);
     //mode="CUSTOM";
     if (mode.equals("CHOOSING")) {
@@ -114,52 +122,56 @@ void displayMenu() {
 }
 
 void mouseClicked() {
-  if (mode=="CHOSEN") {
-    Planet p = new Planet(mouseX, mouseY, (float)Math.random()*50, "Venus", .206, 45);
-    if (mercury) {
-      p = new Planet(mouseX, mouseY, (float)Math.random()*50, "Mercury", .206, .241);
-      mercury = false;
-    } else if (venus) {
-      p = new Planet(mouseX, mouseY, (float)Math.random()*50, "Venus", .0068, .615);
-      venus = false;
-    } else if (earth) {
-      p = new Planet(mouseX, mouseY, (float)Math.random()*50, "Earth", .0167, 1);
-      earth = false;
-    } else if (mars) {
-      p = new Planet(mouseX, mouseY, (float)Math.random()*50, "Mars", .0934, 1.88);
-      mars = false;
-    } else if (jupiter) {
-      p = new Planet(mouseX, mouseY, (float)Math.random()*50, "Jupiter", .0485, 11.9);
-      jupiter = false;
-    } else if (saturn) {
-      p = new Planet(mouseX, mouseY, (float)Math.random()*50, "Saturn", .0556, 29.5);
-      saturn = false;
-    } else if (uranus) {
-      p = new Planet(mouseX, mouseY, (float)Math.random()*50, "Uranus", .0472, 84);
-      uranus = false;
-    } else if (neptune) {
-      p = new Planet(mouseX, mouseY, (float)Math.random()*50, "Neptune", .0086, 165);
-    } else if (pluto) {
-      p = new Planet(mouseX, mouseY, (float)Math.random()*50, "Pluto", .25, 248);
-    } else {
-      p = new Planet(mouseX, mouseY, (float)Math.random()*50, "Custom", .206, 45); //have to choose interactively
+  if (mode.equals("ORBIT")) {
+    if (mode.equals("CHOSEN")) {
+      Planet p = new Planet(mouseX, mouseY, (float)Math.random()*50, "Venus", .206, 45);
+      if (mercury) {
+        p = new Planet(mouseX, mouseY, (float)Math.random()*50, "Mercury", .206, .241);
+        mercury = false;
+      } else if (venus) {
+        p = new Planet(mouseX, mouseY, (float)Math.random()*50, "Venus", .0068, .615);
+        venus = false;
+      } else if (earth) {
+        p = new Planet(mouseX, mouseY, (float)Math.random()*50, "Earth", .0167, 1);
+        earth = false;
+      } else if (mars) {
+        p = new Planet(mouseX, mouseY, (float)Math.random()*50, "Mars", .0934, 1.88);
+        mars = false;
+      } else if (jupiter) {
+        p = new Planet(mouseX, mouseY, (float)Math.random()*50, "Jupiter", .0485, 11.9);
+        jupiter = false;
+      } else if (saturn) {
+        p = new Planet(mouseX, mouseY, (float)Math.random()*50, "Saturn", .0556, 29.5);
+        saturn = false;
+      } else if (uranus) {
+        p = new Planet(mouseX, mouseY, (float)Math.random()*50, "Uranus", .0472, 84);
+        uranus = false;
+      } else if (neptune) {
+        p = new Planet(mouseX, mouseY, (float)Math.random()*50, "Neptune", .0086, 165);
+      } else if (pluto) {
+        p = new Planet(mouseX, mouseY, (float)Math.random()*50, "Pluto", .25, 248);
+      } else {
+        p = new Planet(mouseX, mouseY, (float)Math.random()*50, "Custom", .206, 45); //have to choose interactively
+      }
+      toDisplay.add(p);
+      toMove.add(p);
+      mode="CHOOSING";
     }
-    toDisplay.add(p);
-    toMove.add(p);
-    mode="CHOOSING";
-  }
-  if (mode.equals("CUSTOM") || mode.equals("CUSTOM2")) {
-    if (mouseX>10 && mouseY>100 && mouseX<120 && mouseY<160) {
-      if (mode.equals("CUSTOM")) massy+=10;
-      else radiussy+=10;
-    }
-    if (mouseX>10 && mouseY>160 && mouseX<120 && mouseY<220) {
-      if (mode.equals("CUSTOM") && massy>0) massy-=10;
-      else if (radiussy>0) radiussy-=10;
+    if (mode.equals("CUSTOM") || mode.equals("CUSTOM2")) {
+      if (mouseX>10 && mouseY>100 && mouseX<120 && mouseY<160) {
+        if (mode.equals("CUSTOM")) massy+=10;
+        else radiussy+=10;
+      }
+      if (mouseX>10 && mouseY>160 && mouseX<120 && mouseY<220) {
+        if (mode.equals("CUSTOM") && massy>0) massy-=10;
+        else if (radiussy>0) radiussy-=10;
+      }
     }
   }
   if (mode.equals("MENU")) {
-    
+    if (mouseX> width/2-200 && mouseX < width/2+200 && mouseY > height/2-200 && mouseY < height/2-100) {
+      mode="ORBIT";
+    }
   }
 }
 
@@ -174,9 +186,9 @@ void keyPressed() {
   if (key == '7') neptune = true;
   if (key == '8') pluto = true;
   if (key == '9') custom = true;
-  if (mode=="CHOOSING") mode="CHOSEN";
+  if (mode.equals("CHOOSING")) mode="CHOSEN";
   if (key == '9') mode= "CUSTOM";
-  if (mode=="CUSTOM") {
+  if (mode.equals("CUSTOM")) {
     if (keyCode==ENTER) {
       mode="CUSTOM2";
     }
