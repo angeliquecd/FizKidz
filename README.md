@@ -16,5 +16,8 @@
 **Wednesday 5/22:** 
 *Worked on equation of motion, which is circular rather than elliptical. Integrated interface in with actual functions. Drew a grid for testing purposes.*
 
-**Friday 4/24:**
+**Friday 5/24:**
 *Fixed issues with elliptical orbit. Decided to make a collideable function for when planets collide with the sun, tried to figure out how to fix bug of planets not going to the right place.*
+
+**Weekend 5/25 - 5/27:**
+*We updated the orbital motion of the planets to take into account their mass/size and starting position relative to the sun. We also added a menu screen and worked to debug several issues: mode not changing to "CHOSEN" in the planet simulation and the features that go with this mode not showing up.*
