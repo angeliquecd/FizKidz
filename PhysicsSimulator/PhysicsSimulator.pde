@@ -36,7 +36,7 @@ void drawGrid() {
   }
 }
 void setup() {
-  size(1000, 1000);
+  size(1000, 800);
   background(255);
   //pushMatrix();
   toDisplay = new ArrayList<Displayable>();
@@ -46,6 +46,7 @@ void setup() {
 
 
 void draw() {
+  displayMenu();
   if (mode.equals("ORBIT")) {
     fill(0, 0, 0);
     fill(255, 255, 0);
@@ -102,6 +103,16 @@ void draw() {
   }
 }
 
+void displayMenu() {
+  rect(width/2-200, height/2-200, 400, 100);
+  rect(width/2-200, height/2-100, 400, 100);
+  fill(0);
+  textSize(32);
+  text("Orbit simulator", width/2-110, height/2-150);
+  text("Projectile Motion", width/2-120, height/2-50);
+  fill(255);
+}
+
 void mouseClicked() {
   if (mode=="CHOSEN") {
     Planet p = new Planet(mouseX, mouseY, (float)Math.random()*50, "Venus", .206, 45);
@@ -137,15 +148,18 @@ void mouseClicked() {
     toMove.add(p);
     mode="CHOOSING";
   }
-  if (mode=="CUSTOM" || mode == "CUSTOM2") {
+  if (mode.equals("CUSTOM") || mode.equals("CUSTOM2")) {
     if (mouseX>10 && mouseY>100 && mouseX<120 && mouseY<160) {
-      if (mode=="CUSTOM") massy+=10;
+      if (mode.equals("CUSTOM")) massy+=10;
       else radiussy+=10;
     }
     if (mouseX>10 && mouseY>160 && mouseX<120 && mouseY<220) {
-      if (mode == "CUSTOM" && massy>0) massy-=10;
+      if (mode.equals("CUSTOM") && massy>0) massy-=10;
       else if (radiussy>0) radiussy-=10;
     }
+  }
+  if (mode.equals("MENU")) {
+    
   }
 }
 
