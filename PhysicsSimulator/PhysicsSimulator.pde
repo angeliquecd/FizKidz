@@ -73,6 +73,7 @@ void draw() {
   }
 }
 void displaylaunch(){
+   if (mode.equals("ANGLESELECT") || mode.equals("VELOCITYSELECT")){
   if (mode.equals("ANGLESELECT")) {
       text("Set the initial launch angle of the projectile by clicking the up-down arrows", 10, 20);
       text("Hit enter once you've selected your angle", 10, 40);
@@ -91,6 +92,14 @@ void displaylaunch(){
     rect(10, 160, 110, 60);
     fill(0, 0, 0);
     triangle(45, 180, 75, 180, 60, 210);
+   }
+  if (mode.equals("EXECUTING")){
+   double vx = cos(angle) * velocity;
+   double vy = sin(angle) * velocity;
+   double xspot+=vx;
+   double yspot+=vy-0.5*9.8;
+  }
+  
 }
 void displayMenu() {
   rect(width/2-200, height/2-200, 400, 100);
@@ -204,6 +213,8 @@ void mouseClicked() {
         if (mode.equals("ANGLESELECT") && angle>0) angle-=1;
         else if (velocity>0) velocity-=1;
       }
+      if (mode.equals(SPOTFINDER)){
+      }
   }
   if (simMode.equals("MENU")) {
     if (mouseX> width/2-200 && mouseX < width/2+200 && mouseY > height/2-200 && mouseY < height/2-100) {
@@ -239,7 +250,8 @@ void keyPressed() {
   if (simMode.equals("PROJECTILE")){
     if (mode.equals("ANGLESELECT")){
     if (keyCode==ENTER) mode = "VELOCITYSELECT";
-    else mode = "EXECUTING";
+    if (mode.equals("VELOCITYSELECTOR")) mode = "SPOTFINDER";
+    else mode ="EXECUTING"
   }
   }
 }
