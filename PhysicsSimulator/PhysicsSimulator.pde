@@ -34,6 +34,8 @@ interface Moveable {
 
 ArrayList<Displayable> toDisplay;
 ArrayList<Moveable> toMove;
+ArrayList<Displayable> toDisplayp;
+ArrayList<Moveable> toMovep;
 void drawGrid() {
   for (int x =0; x<width; x+=10) {
     fill(0, 0, 0);
@@ -47,7 +49,8 @@ void setup() {
   //pushMatrix();
   toDisplay = new ArrayList<Displayable>();
   toMove = new ArrayList<Moveable>();
-  //drawGrid();
+  toDisplayp = new ArrayList<Displayable>();
+  toMovep = new ArrayList<Moveable>();
 }
 
 
@@ -93,11 +96,14 @@ void displaylaunch(){
     fill(0, 0, 0);
     triangle(45, 180, 75, 180, 60, 210);
    }
+   if (mode.equals("SPOTFINDER")){
+   triangle(mouseX,mouseY,mouseX+20,mouseY,mouseX+10,mouseY+13);
+ }
   if (mode.equals("EXECUTING")){
-   double vx = cos(angle) * velocity;
-   double vy = sin(angle) * velocity;
-   double xspot+=vx;
-   double yspot+=vy-0.5*9.8;
+   for (Displayable x: toDisplayp){
+     x.display();}
+     for(Moveable y:toMovep){
+       y.move();}
   }
   
 }
@@ -204,7 +210,7 @@ void mouseClicked() {
     }
   }
   if (simMode.equals("PROJECTILE")){
-    println(""+mouseX+", "+mouseY);
+  //  println(""+mouseX+", "+mouseY);
      if (mouseX>10 && mouseY>100 && mouseX<120 && mouseY<160) {
         if (mode.equals("ANGLESELECT")) angle+=1;
         else velocity+=1;
@@ -213,7 +219,13 @@ void mouseClicked() {
         if (mode.equals("ANGLESELECT") && angle>0) angle-=1;
         else if (velocity>0) velocity-=1;
       }
-      if (mode.equals(SPOTFINDER)){
+      if (mode.equals("SPOTFINDER")){
+        Projectile a = new Projectile(mouseX,mouseY,velocity,angle);
+        mode="EXECUTING";
+        velocity=0;
+        angle=0;
+        toDisplayp.add(a);
+        toMovep.add(a);
       }
   }
   if (simMode.equals("MENU")) {
@@ -249,9 +261,8 @@ void keyPressed() {
   }
   if (simMode.equals("PROJECTILE")){
     if (mode.equals("ANGLESELECT")){
-    if (keyCode==ENTER) mode = "VELOCITYSELECT";
-    if (mode.equals("VELOCITYSELECTOR")) mode = "SPOTFINDER";
-    else mode ="EXECUTING"
+        if (keyCode==ENTER) mode = "VELOCITYSELECT";}
+    else if (mode.equals("VELOCITYSELECT")) mode = "SPOTFINDER";
   }
-  }
+  
 }
