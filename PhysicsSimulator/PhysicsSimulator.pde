@@ -17,8 +17,8 @@ String simMode = "MENU";
 String mode= "CHOOSING";
 //modes for orbit are choosing, chosen, custom and custom2
 //modes for projectile are velocityselector, angleselector and execute
-int massy =0;
-int radiussy =0;
+float massy =0;
+float radiussy =0;
 int angle=0;
 int velocity =0;
 import java.util.*;
@@ -57,6 +57,7 @@ void setup() {
 void draw() {
   background(255);
 //  println(simMode);
+println(mode);
   if (simMode.equals("MENU")) {
     displayMenu();
   }
@@ -142,9 +143,9 @@ void displayOrbit() {
   }
   if (mode.equals("CUSTOM") || mode.equals("CUSTOM2")) {
     if (mode.equals("CUSTOM")) {
-      text("Set the mass of the planet by clicking the up-down arrows", 10, 20);
-      text("Hit enter once you've selected your mass", 10, 40);
-      text ("Mass is: "+ massy +" kg", 10, 240);
+      text("Set the eccentricity of the planet by clicking the up-down arrows", 10, 20);
+      text("Hit enter once you've selected your eccentricity", 10, 40);
+      text ("Eccentricity is: "+ massy, 10, 240);
     }
     if (mode.equals("CUSTOM2")) {
       text("Set the radius of the planet by clicking the up-down arrows", 10, 20);
@@ -192,7 +193,7 @@ void mouseClicked() {
       } else if (pluto) {
         p = new Planet(mouseX, mouseY, (float)Math.random()*50, "Pluto", .25, 248);
       } else {
-        p = new Planet(mouseX, mouseY, (float)Math.random()*50, "Custom", .206, 45); //have to choose interactively
+        p = new Planet(mouseX, mouseY, radiussy/10, "Custom", massy%0.0001, 45); //have to choose interactively
       }
       toDisplay.add(p);
       toMove.add(p);
@@ -200,11 +201,11 @@ void mouseClicked() {
     }
     if (mode.equals("CUSTOM") || mode.equals("CUSTOM2")) {
       if (mouseX>10 && mouseY>100 && mouseX<120 && mouseY<160) {
-        if (mode.equals("CUSTOM")) massy+=10;
+        if (mode.equals("CUSTOM")) massy+=0.01;
         else radiussy+=10;
       }
       if (mouseX>10 && mouseY>160 && mouseX<120 && mouseY<220) {
-        if (mode.equals("CUSTOM") && massy>0) massy-=10;
+        if (mode.equals("CUSTOM") && massy>0) massy-=.010;
         else if (radiussy>0) radiussy-=10;
       }
     }
@@ -256,8 +257,10 @@ void keyPressed() {
     if (mode.equals("CUSTOM")) {
       if (keyCode==ENTER) {
         mode="CUSTOM2";
-      }
-    }
+      }}
+     else if (mode.equals("CUSTOM2")){
+       if (keyCode==ENTER) mode="CHOSEN";
+     }
   }
   if (simMode.equals("PROJECTILE")){
     if (mode.equals("ANGLESELECT")){
