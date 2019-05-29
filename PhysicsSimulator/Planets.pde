@@ -51,5 +51,4 @@ class Planet implements Displayable, Moveable {
   void setE(float ecc) {
     e = ecc;
   }
-
 }

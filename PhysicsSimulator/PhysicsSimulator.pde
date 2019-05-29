@@ -56,29 +56,36 @@ void setup() {
 
 void draw() {
   background(255);
-//  println(simMode);
-println(mode);
+  //  println(simMode);
+  println(mode);
   if (simMode.equals("MENU")) {
     displayMenu();
-  }
-  if (simMode.equals("ORBIT")) {
-    Planet sun = new Planet(sunX, sunY, 100, "Sun", 1, 0);
-    toDisplay.add(sun);
-    displayOrbit();
-  for (Displayable x : toDisplay) { //displays all the things
-    x.display();
-  }
-  for (Moveable x : toMove) {
-    x.move();
-  }
-  }
-  if (simMode.equals("PROJECTILE")){
-    displaylaunch();
+  } else {
+    fill(255);
+    rect(width-110, 5, 100, 50);
+    fill(0);
+    text("Menu", width-75, 35);
+    if (simMode.equals("ORBIT")) {
+      Planet sun = new Planet(sunX, sunY, 100, "Sun", 1, 0);
+      toDisplay.add(sun);
+      displayOrbit();
+      for (Displayable x : toDisplay) { //displays all the things
+        x.display();
+      }
+      for (Moveable x : toMove) {
+        x.move();
+      }
+    }
+    if (simMode.equals("PROJECTILE")) {
+      displaylaunch();
+    }
   }
 }
-void displaylaunch(){
-   if (mode.equals("ANGLESELECT") || mode.equals("VELOCITYSELECT")){
-  if (mode.equals("ANGLESELECT")) {
+
+void displaylaunch() {
+  if (mode.equals("ANGLESELECT") || mode.equals("VELOCITYSELECT")) {
+    textSize(14);
+    if (mode.equals("ANGLESELECT")) {
       text("Set the initial launch angle of the projectile by clicking the up-down arrows", 10, 20);
       text("Hit enter once you've selected your angle", 10, 40);
       text ("Angle is: "+ angle +" ˚", 10, 240);
@@ -96,18 +103,20 @@ void displaylaunch(){
     rect(10, 160, 110, 60);
     fill(0, 0, 0);
     triangle(45, 180, 75, 180, 60, 210);
-   }
-   if (mode.equals("SPOTFINDER")){
-   triangle(mouseX,mouseY,mouseX+20,mouseY,mouseX+10,mouseY+13);
- }
-  if (mode.equals("EXECUTING")){
-   for (Displayable x: toDisplayp){
-     x.display();}
-     for(Moveable y:toMovep){
-       y.move();}
   }
-  
+  if (mode.equals("SPOTFINDER")) {
+    triangle(mouseX, mouseY, mouseX+20, mouseY, mouseX+10, mouseY+13);
+  }
+  if (mode.equals("EXECUTING")) {
+    for (Displayable x : toDisplayp) {
+      x.display();
+    }
+    for (Moveable y : toMovep) {
+      y.move();
+    }
+  }
 }
+
 void displayMenu() {
   rect(width/2-200, height/2-200, 400, 100);
   rect(width/2-200, height/2-100, 400, 100);
@@ -177,7 +186,7 @@ void mouseClicked() {
         p = new Planet(mouseX, mouseY, 6.3, "Earth", .0167, 1);
         earth = false;
       } else if (mars) {
-        p = new Planet(mouseX, mouseY,3.4, "Mars", .0934, 1.88);
+        p = new Planet(mouseX, mouseY, 3.4, "Mars", .0934, 1.88);
         mars = false;
       } else if (jupiter) {
         p = new Planet(mouseX, mouseY, 69.9, "Jupiter", .0485, 11.9);
@@ -210,24 +219,24 @@ void mouseClicked() {
       }
     }
   }
-  if (simMode.equals("PROJECTILE")){
-  //  println(""+mouseX+", "+mouseY);
-     if (mouseX>10 && mouseY>100 && mouseX<120 && mouseY<160) {
-        if (mode.equals("ANGLESELECT")) angle+=1;
-        else velocity+=1;
-      }
-      if (mouseX>10 && mouseY>160 && mouseX<120 && mouseY<220) {
-        if (mode.equals("ANGLESELECT") && angle>0) angle-=1;
-        else if (velocity>0) velocity-=1;
-      }
-      if (mode.equals("SPOTFINDER")){
-        Projectile a = new Projectile(mouseX,mouseY,velocity,angle);
-        mode="EXECUTING";
-        velocity=0;
-        angle=0;
-        toDisplayp.add(a);
-        toMovep.add(a);
-      }
+  if (simMode.equals("PROJECTILE")) {
+    //  println(""+mouseX+", "+mouseY);
+    if (mouseX>10 && mouseY>100 && mouseX<120 && mouseY<160) {
+      if (mode.equals("ANGLESELECT")) angle+=1;
+      else velocity+=1;
+    }
+    if (mouseX>10 && mouseY>160 && mouseX<120 && mouseY<220) {
+      if (mode.equals("ANGLESELECT") && angle>0) angle-=1;
+      else if (velocity>0) velocity-=1;
+    }
+    if (mode.equals("SPOTFINDER")) {
+      Projectile a = new Projectile(mouseX, mouseY, velocity, angle);
+      mode="EXECUTING";
+      velocity=0;
+      angle=0;
+      toDisplayp.add(a);
+      toMovep.add(a);
+    }
   }
   if (simMode.equals("MENU")) {
     if (mouseX> width/2-200 && mouseX < width/2+200 && mouseY > height/2-200 && mouseY < height/2-100) {
@@ -237,6 +246,10 @@ void mouseClicked() {
       simMode="PROJECTILE";
       mode="ANGLESELECT";
     }
+  }
+  if (mouseX > width-110 && mouseX < width-10 && mouseY > 5 && mouseY < 55) {
+    simMode = "MENU";
+    mode = "CHOOSING";
   }
 }
 
@@ -257,15 +270,14 @@ void keyPressed() {
     if (mode.equals("CUSTOM")) {
       if (keyCode==ENTER) {
         mode="CUSTOM2";
-      }}
-     else if (mode.equals("CUSTOM2")){
-       if (keyCode==ENTER) mode="CHOSEN";
-     }
+      }
+    } else if (mode.equals("CUSTOM2")) {
+      if (keyCode==ENTER) mode="CHOSEN";
+    }
   }
-  if (simMode.equals("PROJECTILE")){
-    if (mode.equals("ANGLESELECT")){
-        if (keyCode==ENTER) mode = "VELOCITYSELECT";}
-    else if (mode.equals("VELOCITYSELECT")) mode = "SPOTFINDER";
+  if (simMode.equals("PROJECTILE")) {
+    if (mode.equals("ANGLESELECT")) {
+      if (keyCode==ENTER) mode = "VELOCITYSELECT";
+    } else if (mode.equals("VELOCITYSELECT")) mode = "SPOTFINDER";
   }
-  
 }
