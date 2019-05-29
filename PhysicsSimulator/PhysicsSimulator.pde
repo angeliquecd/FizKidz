@@ -168,30 +168,30 @@ void mouseClicked() {
     if (mode.equals("CHOSEN")) {
       Planet p = new Planet(mouseX, mouseY, (float)Math.random()*50, "Venus", .206, 45);
       if (mercury) {
-        p = new Planet(mouseX, mouseY, (float)Math.random()*50, "Mercury", .206, .241);
+        p = new Planet(mouseX, mouseY, 2.4, "Mercury", .206, .241);
         mercury = false;
       } else if (venus) {
-        p = new Planet(mouseX, mouseY, (float)Math.random()*50, "Venus", .0068, .615);
+        p = new Planet(mouseX, mouseY, 6.1, "Venus", .0068, .615);
         venus = false;
       } else if (earth) {
-        p = new Planet(mouseX, mouseY, (float)Math.random()*50, "Earth", .0167, 1);
+        p = new Planet(mouseX, mouseY, 6.3, "Earth", .0167, 1);
         earth = false;
       } else if (mars) {
-        p = new Planet(mouseX, mouseY, (float)Math.random()*50, "Mars", .0934, 1.88);
+        p = new Planet(mouseX, mouseY,3.4, "Mars", .0934, 1.88);
         mars = false;
       } else if (jupiter) {
-        p = new Planet(mouseX, mouseY, (float)Math.random()*50, "Jupiter", .0485, 11.9);
+        p = new Planet(mouseX, mouseY, 69.9, "Jupiter", .0485, 11.9);
         jupiter = false;
       } else if (saturn) {
-        p = new Planet(mouseX, mouseY, (float)Math.random()*50, "Saturn", .0556, 29.5);
+        p = new Planet(mouseX, mouseY, 58.2, "Saturn", .0556, 29.5);
         saturn = false;
       } else if (uranus) {
-        p = new Planet(mouseX, mouseY, (float)Math.random()*50, "Uranus", .0472, 84);
+        p = new Planet(mouseX, mouseY, 25.4, "Uranus", .0472, 84);
         uranus = false;
       } else if (neptune) {
-        p = new Planet(mouseX, mouseY, (float)Math.random()*50, "Neptune", .0086, 165);
+        p = new Planet(mouseX, mouseY, 24.6, "Neptune", .0086, 165);
       } else if (pluto) {
-        p = new Planet(mouseX, mouseY, (float)Math.random()*50, "Pluto", .25, 248);
+        p = new Planet(mouseX, mouseY, 0.8, "Pluto", .25, 248);
       } else {
         p = new Planet(mouseX, mouseY, radiussy/10, "Custom", massy%0.0001, 45); //have to choose interactively
       }
