@@ -234,8 +234,14 @@ class Planet implements Displayable, Moveable {
   }
   
   void findAngle() {
-    if (xCor > sunX) {
+    if (xCor > sunX && yCor > sunY) {
       angle = atan((xCor - sunX)/(yCor - sunY)) + PI/2;
+    }
+    else if (xCor > sunX && yCor < sunY) {
+      angle = PI/2 - atan((xCor - sunX)/(yCor - sunY));
+    }
+    else if (xCor < sunX && yCor > sunY) {
+      angle = 2*PI - atan((xCor - sunX)/(yCor - sunY));
     }
     else {
       angle = 3*PI/2 - atan((xCor - sunX)/(yCor - sunY));
