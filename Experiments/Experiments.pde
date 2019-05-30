@@ -102,7 +102,7 @@ void draw() {
 
 void mouseClicked() {
   if (mode=="CHOSEN") {
-    Planet p = new Planet(mouseX, mouseY, (float)Math.random()*50, "Venus", .206, 45);
+    Planet p = new Planet(mouseX, mouseY, 50, "Venus", .206, 45);
     if (mercury) {
       p = new Planet(mouseX, mouseY, 50, "Mercury", .206, .241);
       mercury = false;
@@ -200,7 +200,7 @@ class Planet implements Displayable, Moveable {
     xCor = x;
     yCor = y;
     a = (float) Math.sqrt((sunX-xCor)*(sunX-xCor) + (sunY-yCor)*(sunY-yCor)) / (1+e); //half of major axis of ellipse
-    angle = 0; 
+    angle = PI/2 - atan((xCor - sunX)/(yCor - sunY)); 
     period = (float)Math.sqrt(4*PI*PI*a*a*a/G/mass);
     speed = period/360;//random(-PI/180, PI/180); //to be determined by mass/force of gravity
     name = nm;
@@ -216,7 +216,7 @@ class Planet implements Displayable, Moveable {
     fill(255, 255, 0);
     circle(xCor, yCor, radius);
     //fill(0);
-    //text("" + xCor + ", " + yCor, xCor, yCor);
+    text("" + mouseX + ", " + mouseY, mouseX, mouseY);
   }
 
   void move() { //will determine elliptical motion of each planet
@@ -231,6 +231,15 @@ class Planet implements Displayable, Moveable {
 
   void setE(float ecc) {
     e = ecc;
+  }
+  
+  void findAngle() {
+    if (xCor > sunX) {
+      angle = atan((xCor - sunX)/(yCor - sunY)) + PI/2;
+    }
+    else {
+      angle = 3*PI/2 - atan((xCor - sunX)/(yCor - sunY));
+    }
   }
 
 }
