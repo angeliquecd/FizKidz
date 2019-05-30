@@ -200,7 +200,7 @@ class Planet implements Displayable, Moveable {
     xCor = x;
     yCor = y;
     a = (float) Math.sqrt((sunX-xCor)*(sunX-xCor) + (sunY-yCor)*(sunY-yCor)) / (1+e); //half of major axis of ellipse
-    angle = PI/2 - atan((xCor - sunX)/(yCor - sunY)); 
+    angle = 0;
     period = (float)Math.sqrt(4*PI*PI*a*a*a/G/mass);
     speed = period/360;//random(-PI/180, PI/180); //to be determined by mass/force of gravity
     name = nm;
@@ -208,6 +208,7 @@ class Planet implements Displayable, Moveable {
     b = (float)Math.sqrt(a*a - c*c);
     centerx = sunX + (c/(a+c))*(xCor - sunX);
     centery = sunY + (c/(a+c))*(yCor - sunY);
+    findAngle();
     println(a);
     println(period);
   }
@@ -234,17 +235,17 @@ class Planet implements Displayable, Moveable {
   }
   
   void findAngle() {
-    if (xCor > sunX && yCor > sunY) {
-      angle = atan((xCor - sunX)/(yCor - sunY)) + PI/2;
+    if (xCor > sunX && yCor > sunY) { //works
+      angle = atan(Math.abs((xCor - sunX)/(yCor - sunY)));
     }
-    else if (xCor > sunX && yCor < sunY) {
-      angle = PI/2 - atan((xCor - sunX)/(yCor - sunY));
+    else if (xCor > sunX && yCor < sunY) { //works
+      angle = PI - atan(Math.abs((xCor - sunX)/(yCor - sunY)));
     }
-    else if (xCor < sunX && yCor > sunY) {
-      angle = 2*PI - atan((xCor - sunX)/(yCor - sunY));
+    else if (xCor < sunX && yCor > sunY) { //works
+      angle =  - atan(Math.abs((xCor - sunX)/(yCor - sunY)));
     }
-    else {
-      angle = 3*PI/2 - atan((xCor - sunX)/(yCor - sunY));
+    else if (xCor < sunX && yCor < sunY) {
+      angle = 3*PI/2 - atan(Math.abs((xCor - sunX)/(yCor - sunY)));
     }
   }
 
