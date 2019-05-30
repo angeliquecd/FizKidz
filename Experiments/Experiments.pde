@@ -245,7 +245,7 @@ class Planet implements Displayable, Moveable {
       angle =  - atan(Math.abs((xCor - sunX)/(yCor - sunY)));
     }
     else if (xCor < sunX && yCor < sunY) {
-      angle = 3*PI/2 - atan(Math.abs((xCor - sunX)/(yCor - sunY)));
+      angle = PI + atan(Math.abs((xCor - sunX)/(yCor - sunY)));
     }
   }
 
