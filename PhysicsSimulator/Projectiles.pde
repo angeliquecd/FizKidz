@@ -8,6 +8,7 @@ class Projectile implements Displayable, Moveable {
   float t;
   float currenty;
   float currentx;
+  float speed;
 
   Projectile(float startx, float starty, float totalv, float totala) {
     initialx=startx;
@@ -17,7 +18,8 @@ class Projectile implements Displayable, Moveable {
     println(sin(angle));
     vy= sin(angle)* velocity;
     vx=cos(angle)*velocity;
-    t=0;
+    t=0; //parameter for parametric equations, determined by time of flight equation: T = 2*vy/g
+    speed = 1;
     currentx=initialx;
     currenty=initialy;
     println("Velocities: " +vx+", "+vy);
@@ -26,7 +28,7 @@ class Projectile implements Displayable, Moveable {
     setupDisplay();
     fill(0, 0, 0);
     //triangle(currentx, currenty, initialx+20, initialy, initialx+10, initialy+13);
-    circle(initialx, initialy, 40);
+    circle(currentx, currenty, 40);
   }
   
   void setupDisplay() {
@@ -35,19 +37,23 @@ class Projectile implements Displayable, Moveable {
   }
   
   void move() {
-    t=0;
-    float currentvy=vy;
-    while (currentx>0 && currenty>0 && currentx<width && currenty<height) {
-      currentx=initialx+vx*t;
-      currentvy=-9.8*t+vy;
-      float highestheight=vy*vy/(2*9.8);
-      float totaltime=2*highestheight/vy;
-      if ( t<totaltime/2) currenty=initialy-vy*t;//+0.5*9.8*t*t;
-      else currenty=initialy+vy*t;
-      t+=0.1;
-      println(""+ currentx+","+currenty+" "+t+", "+currentvy);
-      // fill(0,0,0);
-      //ellipse(initialx,initialy,5,5);
-    }
+    t+=speed;
+    currentx = vx * t + initialx;
+    currenty = vy * t - 1/2*9.81*t*t + initialy;
+    
+    //t=0;
+    //float currentvy=vy;
+    //while (currentx>0 && currenty>0 && currentx<width && currenty<height) {
+    //  currentx=initialx+vx*t;
+    //  currentvy=-9.8*t+vy;
+    //  float highestheight=vy*vy/(2*9.8);
+    //  float totaltime=2*highestheight/vy;
+    //  if ( t<totaltime/2) currenty=initialy-vy*t;//+0.5*9.8*t*t;
+    //  else currenty=initialy+vy*t;
+    //  t+=speed;
+    //  println(""+ currentx+","+currenty+" "+t+", "+currentvy);
+    //  // fill(0,0,0);
+    //  //ellipse(initialx,initialy,5,5);
+    //}
   }
 }
