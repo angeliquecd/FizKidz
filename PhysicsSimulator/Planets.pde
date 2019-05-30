@@ -21,7 +21,6 @@ class Planet implements Displayable, Moveable {
     xCor = x;
     yCor = y;
     a = (float) Math.sqrt((sunX-xCor)*(sunX-xCor) + (sunY-yCor)*(sunY-yCor)) / (1+e); //half of major axis of ellipse
-    //angle = 0; 
     findAngle();
     period = (float)Math.sqrt(4*PI*PI*a*a*a/G/mass); //Kepler's Law of Periods
     speed = period/360; //to be determined by mass/force of gravity

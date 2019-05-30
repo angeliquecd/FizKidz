@@ -64,8 +64,12 @@ void draw() {
     fill(255);
     rect(width-110, 5, 100, 50);
     fill(0);
-    text("Menu", width-75, 35);
+    text("Menu", width-75, 35); //Menu Button
     if (simMode.equals("ORBIT")) {
+      fill(255);
+      rect(width-110, 60, 100, 50);
+      fill(0);
+      text("Clear", width-75, 90); //Clear button
       Planet sun = new Planet(sunX, sunY, 100, "Sun", 1, 0);
       toDisplay.add(sun);
       displayOrbit();
@@ -247,8 +251,15 @@ void mouseClicked() {
       mode="ANGLESELECT";
     }
   }
-  if (mouseX > width-110 && mouseX < width-10 && mouseY > 5 && mouseY < 55) {
+  if (mouseX > width-110 && mouseX < width-10 && mouseY > 5 && mouseY < 55) { //Go back to menu
     simMode = "MENU";
+    mode = "CHOOSING";
+  }
+  if (mouseX > width-100 && mouseX < width-10 && mouseY > 60 && mouseY < 110) { //Clear planet screen
+    toDisplay.clear();
+    toMove.clear();
+    Planet sun = new Planet(sunX, sunY, 100, "Sun", 1, 0);
+    toDisplay.add(sun);
     mode = "CHOOSING";
   }
 }
