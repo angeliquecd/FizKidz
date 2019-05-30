@@ -36,6 +36,7 @@ ArrayList<Displayable> toDisplay;
 ArrayList<Moveable> toMove;
 ArrayList<Displayable> toDisplayp;
 ArrayList<Moveable> toMovep;
+
 void drawGrid() {
   for (int x =0; x<width; x+=10) {
     fill(0, 0, 0);
@@ -43,6 +44,7 @@ void drawGrid() {
     line(0, x, 1000, x);
   }
 }
+
 void setup() {
   size(1000, 800);
   //background(255);
@@ -53,10 +55,8 @@ void setup() {
   toMovep = new ArrayList<Moveable>();
 }
 
-
 void draw() {
   background(255);
-  //  println(simMode);
   println(mode);
   if (simMode.equals("MENU")) {
     displayMenu();
@@ -66,10 +66,6 @@ void draw() {
     fill(0);
     text("Menu", width-75, 35); //Menu Button
     if (simMode.equals("ORBIT")) {
-      fill(255);
-      rect(width-110, 60, 100, 50);
-      fill(0);
-      text("Clear", width-75, 90); //Clear button
       Planet sun = new Planet(sunX, sunY, 100, "Sun", 1, 0);
       toDisplay.add(sun);
       displayOrbit();
@@ -87,6 +83,13 @@ void draw() {
 }
 
 void displaylaunch() {
+  Projectile a = new Projectile(30, height-70, velocity, angle);
+  toDisplayp.add(a);
+  toMovep.add(a);
+  fill(255);
+  rect(width-110, 60, 100, 50);
+  fill(0);
+  text("Clear", width-75, 90); //Clear button
   if (mode.equals("ANGLESELECT") || mode.equals("VELOCITYSELECT")) {
     textSize(14);
     if (mode.equals("ANGLESELECT")) {
@@ -112,12 +115,12 @@ void displaylaunch() {
     triangle(mouseX, mouseY, mouseX+20, mouseY, mouseX+10, mouseY+13);
   }
   if (mode.equals("EXECUTING")) {
-    for (Displayable x : toDisplayp) {
-      x.display();
-    }
     for (Moveable y : toMovep) {
       y.move();
     }
+  }
+  for (Displayable x : toDisplayp) {
+    x.display();
   }
 }
 
@@ -126,12 +129,16 @@ void displayMenu() {
   rect(width/2-200, height/2-100, 400, 100);
   fill(0);
   textSize(32);
-  text("Orbit simulator", width/2-110, height/2-150);
+  text("Planetary Orbit", width/2-110, height/2-150);
   text("Projectile Motion", width/2-120, height/2-50);
   fill(255);
 }
 
 void displayOrbit() {
+  fill(255);
+  rect(width-110, 60, 100, 50);
+  fill(0);
+  text("Clear", width-75, 90); //Clear button
   //fill(0, 0, 0);
   //fill(255, 255, 0);
   textSize(14);
@@ -222,6 +229,13 @@ void mouseClicked() {
         else if (radiussy>0) radiussy-=10;
       }
     }
+    if (mouseX > width-100 && mouseX < width-10 && mouseY > 60 && mouseY < 110) { //Clear planet screen
+      toDisplay.clear();
+      toMove.clear();
+      Planet sun = new Planet(sunX, sunY, 100, "Sun", 1, 0);
+      toDisplay.add(sun);
+      mode = "CHOOSING";
+    }
   }
   if (simMode.equals("PROJECTILE")) {
     //  println(""+mouseX+", "+mouseY);
@@ -234,12 +248,15 @@ void mouseClicked() {
       else if (velocity>0) velocity-=1;
     }
     if (mode.equals("SPOTFINDER")) {
-      Projectile a = new Projectile(mouseX, mouseY, velocity, angle);
+      //Projectile a = new Projectile(mouseX, mouseY, velocity, angle);
       mode="EXECUTING";
       velocity=0;
       angle=0;
-      toDisplayp.add(a);
-      toMovep.add(a);
+      //toDisplayp.add(a);
+      //toMovep.add(a);
+    }
+    if (mouseX > width-100 && mouseX < width-10 && mouseY > 60 && mouseY < 110) { //Clear projectile screen
+      mode = "ANGLESELECT";
     }
   }
   if (simMode.equals("MENU")) {
@@ -253,13 +270,6 @@ void mouseClicked() {
   }
   if (mouseX > width-110 && mouseX < width-10 && mouseY > 5 && mouseY < 55) { //Go back to menu
     simMode = "MENU";
-    mode = "CHOOSING";
-  }
-  if (mouseX > width-100 && mouseX < width-10 && mouseY > 60 && mouseY < 110) { //Clear planet screen
-    toDisplay.clear();
-    toMove.clear();
-    Planet sun = new Planet(sunX, sunY, 100, "Sun", 1, 0);
-    toDisplay.add(sun);
     mode = "CHOOSING";
   }
 }

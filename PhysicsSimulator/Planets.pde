@@ -37,6 +37,7 @@ class Planet implements Displayable, Moveable {
     fill(255, 255, 0);
     circle(xCor, yCor, radius);
   }
+   
 
   void move() { //will determine elliptical motion of each planet
     angle += speed;

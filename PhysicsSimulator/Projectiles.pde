@@ -12,8 +12,8 @@ class Projectile implements Displayable, Moveable {
   Projectile(float startx, float starty, float totalv, float totala) {
     initialx=startx;
     initialy=starty;
-    velocity= 10;
-    angle = radians(10);
+    velocity= totalv;
+    angle = radians(totala);
     println(sin(angle));
     vy= sin(angle)* velocity;
     vx=cos(angle)*velocity;
@@ -23,9 +23,17 @@ class Projectile implements Displayable, Moveable {
     println("Velocities: " +vx+", "+vy);
   }
   void display() {
+    setupDisplay();
     fill(0, 0, 0);
-    triangle(currentx, currenty, initialx+20, initialy, initialx+10, initialy+13);
+    //triangle(currentx, currenty, initialx+20, initialy, initialx+10, initialy+13);
+    circle(initialx, initialy, 40);
   }
+  
+  void setupDisplay() {
+    fill(124,252,0);
+    rect(0, height - 50, width, 50);
+  }
+  
   void move() {
     t=0;
     float currentvy=vy;
