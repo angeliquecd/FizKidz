@@ -78,6 +78,14 @@ void draw() {
     }
     if (simMode.equals("PROJECTILE")) {
       displaylaunch();
+      for (Displayable x : toDisplayp) {
+        x.display();
+      }
+      if (mode.equals("EXECUTING")) {
+        for (Moveable y : toMovep) {
+          y.move();
+        }
+      }
     }
   }
 }
@@ -114,14 +122,11 @@ void displaylaunch() {
   if (mode.equals("SPOTFINDER")) {
     triangle(mouseX, mouseY, mouseX+20, mouseY, mouseX+10, mouseY+13);
   }
-  if (mode.equals("EXECUTING")) {
-    for (Moveable y : toMovep) {
-      y.move();
-    }
-  }
-  for (Displayable x : toDisplayp) {
-    x.display();
-  }
+  //if (mode.equals("EXECUTING")) {
+  //  for (Moveable y : toMovep) {
+  //    y.move();
+  //  }
+  //}
 }
 
 void displayMenu() {

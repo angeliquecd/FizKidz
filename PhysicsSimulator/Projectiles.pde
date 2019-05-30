@@ -31,16 +31,17 @@ class Projectile implements Displayable, Moveable {
     circle(currentx, currenty, 40);
   }
   
-  void setupDisplay() {
+   void setupDisplay() {
     fill(124,252,0);
     rect(0, height - 50, width, 50);
   }
   
   void move() {
+    //while (currenty >= initialy) {
     t+=speed;
     currentx = vx * t + initialx;
-    currenty = vy * t - 1/2*9.81*t*t + initialy;
-    
+    currenty = -vy * t + 1/2*9.81*t*t + initialy;
+    //}
     //t=0;
     //float currentvy=vy;
     //while (currentx>0 && currenty>0 && currentx<width && currenty<height) {
