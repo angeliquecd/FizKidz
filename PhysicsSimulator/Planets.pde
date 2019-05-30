@@ -16,21 +16,21 @@ class Planet implements Displayable, Moveable {
 
   Planet(float x, float y, float rad, String nm, float ecc, float period) { //Planet class
     e=ecc;
-    radius = rad; 
-    mass = radius * radius * PI * 5.51;
+    radius = rad; //radius of planet
+    mass = radius * radius * PI * 5.51; //mass determined by size and density
     xCor = x;
     yCor = y;
     a = (float) Math.sqrt((sunX-xCor)*(sunX-xCor) + (sunY-yCor)*(sunY-yCor)) / (1+e); //half of major axis of ellipse
     angle = 0; 
-    period = (float)Math.sqrt(4*PI*PI*a*a*a/G/mass);
-    speed = period/360;//random(-PI/180, PI/180); //to be determined by mass/force of gravity
+    period = (float)Math.sqrt(4*PI*PI*a*a*a/G/mass); //Kepler's Law of Periods
+    speed = period/360; //to be determined by mass/force of gravity
     name = nm;
     c = e*a;
     b = (float)Math.sqrt(a*a - c*c);
     centerx = sunX + (c/(a+c))*(xCor - sunX);
     centery = sunY + (c/(a+c))*(yCor - sunY);
-    println(a);
-    println(period);
+    //println(a);
+    //println(period);
   }
 
   void display() {
