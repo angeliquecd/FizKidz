@@ -77,6 +77,9 @@ void draw() {
       }
     }
     if (simMode.equals("PROJECTILE")) {
+      Projectile a = new Projectile(30, height-70, velocity, angle);
+      toDisplayp.add(a);
+      toMovep.add(a);
       displaylaunch();
       for (Displayable x : toDisplayp) {
         x.display();
@@ -91,9 +94,6 @@ void draw() {
 }
 
 void displaylaunch() {
-  Projectile a = new Projectile(30, height-70, velocity, angle);
-  toDisplayp.add(a);
-  toMovep.add(a);
   fill(255);
   rect(width-110, 60, 100, 50);
   fill(0);
@@ -119,9 +119,9 @@ void displaylaunch() {
     fill(0, 0, 0);
     triangle(45, 180, 75, 180, 60, 210);
   }
-  if (mode.equals("SPOTFINDER")) {
-    triangle(mouseX, mouseY, mouseX+20, mouseY, mouseX+10, mouseY+13);
-  }
+  //if (mode.equals("SPOTFINDER")) {
+  //  triangle(mouseX, mouseY, mouseX+20, mouseY, mouseX+10, mouseY+13);
+  //}
   //if (mode.equals("EXECUTING")) {
   //  for (Moveable y : toMovep) {
   //    y.move();
@@ -252,15 +252,17 @@ void mouseClicked() {
       if (mode.equals("ANGLESELECT") && angle>0) angle-=1;
       else if (velocity>0) velocity-=1;
     }
-    if (mode.equals("SPOTFINDER")) {
-      //Projectile a = new Projectile(mouseX, mouseY, velocity, angle);
-      mode="EXECUTING";
-      velocity=0;
-      angle=0;
-      //toDisplayp.add(a);
-      //toMovep.add(a);
-    }
+    //if (mode.equals("SPOTFINDER")) {
+    //  //Projectile a = new Projectile(mouseX, mouseY, velocity, angle);
+    //  mode="EXECUTING";
+    //  velocity=0;
+    //  angle=0;
+    //  //toDisplayp.add(a);
+    //  //toMovep.add(a);
+    //}
     if (mouseX > width-100 && mouseX < width-10 && mouseY > 60 && mouseY < 110) { //Clear projectile screen
+      toDisplayp.clear();
+      toMovep.clear();
       mode = "ANGLESELECT";
     }
   }
@@ -304,6 +306,6 @@ void keyPressed() {
   if (simMode.equals("PROJECTILE")) {
     if (mode.equals("ANGLESELECT")) {
       if (keyCode==ENTER) mode = "VELOCITYSELECT";
-    } else if (mode.equals("VELOCITYSELECT")) mode = "SPOTFINDER";
+    } else if (mode.equals("VELOCITYSELECT")) mode = "EXECUTING";
   }
 }
