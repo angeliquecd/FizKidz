@@ -27,5 +27,5 @@
 **Wednesday 5/29:**
 
 
-Thursday 5/30:**
+**Thursday 5/30:**
 *We fixed the issue in the planetary orbit simulation where planets jumped to the wrong coordinates when placed. We also started working more on the projectile motion model by setting up the correct parametric equations for move() and creating a basic template for display().*
