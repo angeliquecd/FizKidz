@@ -19,16 +19,21 @@
 *Fixed issues with elliptical orbit. Decided to make a collideable function for when planets collide with the sun, tried to figure out how to fix bug of planets not going to the right place.*
 
 **Weekend 5/25 - 5/27:**
-*We updated the orbital motion of the planets to take into account their mass/size and starting position relative to the sun. We also added a menu screen and worked to debug several issues: mode not changing to "CHOSEN" in the planet simulation and the features that go with this mode not showing up, and the issue where the planets moved with multiple copies instead of just one planet orbiting the sun.*
+* Angelique: *Worked on the different modes that determine what functions are accessible by user. Also started working on the projectile class with variables, constructor, etc. and made modes for projectile class.*
+* Aditi: *Updated the orbital motion of the planets to depend on size and starting position relative to sun. Also added a menu screen and debugged planet motion. Made a simmode to keep track of which simulation the user is interacting with.*
 
 **Tuesday 5/28:**
-*We worked on spacing and working through the overall simmode of the game before starting the projectile class. We also spent a good amount of time debugging the orbital class.*
+* Angelique: *Worked on different methods in the projectile class. Spent time on figuring out the math for making projectiles move.*
+* Aditi: *Sick :(*
 
 **Wednesday 5/29:**
-*We edited the modes to include a projectile mode that was more fleshed out and started to work on math for projectiles. We also edited existing planets so that their size matched their relative size in space.*
+* Angelique: *Edited the modes to include a projectile mode that was more fleshed out and started to work on math for projectiles. Also edited existing planets so that their size matched their relative size in space.*
+* Aditi: *Added a "MENU" button in projectile and planet simulations so user can return to menu screen.*
 
 **Thursday 5/30:**
-*We fixed the issue in the planetary orbit simulation where planets jumped to the wrong coordinates when placed. We also started working more on the projectile motion model by setting up the correct parametric equations for move() and creating a basic template for display().*
+* Angelique: *Made it so that every planet in the planet simulation would have the proper corresponding color and the make-your-own had a randomly assigned color.*
+* Aditi: *Fixed the issue in the planetary orbit where planets jumped to the wrong coordinates when placed. Also started working more on the projectile motion model by setting up the correct parametric equations for move() and creating a basic template for display().*
 
 **Friday 5/31**
-*Aditi continued to fix the math of the projectile on paper and in the code. Angelique worked on the background colors of the solar system and changing the button colors, while fixing merging errors.*
+* Angelique: *Worked on the background colors of the solar system (changed to black to look like outer space) and changing the button colors, while fixing merging errors. Also fixed planet sizing and tested the program on a school computer.*
+* Aditi: *Continued to fix the math of the projectile on paper and in the code.* 
