@@ -69,11 +69,14 @@ void setup() {
   toMovep = new ArrayList<Moveable>();
   Planet sun = new Planet(sunX, sunY, 100, "Sun", 1, 0, yellow);
   toDisplay.add(sun);
+  Projectile a = new Projectile(30, height-70, velocity, angle);
+  toDisplayp.add(a);
+  toMovep.add(a);
 }
 
 void draw() {
   background(255);
-  println(mode);
+  //println(mode);
   if (simMode.equals("MENU")) {
     displayMenu();
   } else {
@@ -97,9 +100,7 @@ void draw() {
       }
     }
     if (simMode.equals("PROJECTILE")) {
-      Projectile a = new Projectile(30, height-70, velocity, angle);
-      toDisplayp.add(a);
-      toMovep.add(a);
+
       displaylaunch();
       for (Displayable x : toDisplayp) {
         x.display();
@@ -139,14 +140,6 @@ void displaylaunch() {
     fill(0, 0, 0);
     triangle(45, 180, 75, 180, 60, 210);
   }
-  //if (mode.equals("SPOTFINDER")) {
-  //  triangle(mouseX, mouseY, mouseX+20, mouseY, mouseX+10, mouseY+13);
-  //}
-  //if (mode.equals("EXECUTING")) {
-  //  for (Moveable y : toMovep) {
-  //    y.move();
-  //  }
-  //}
 }
 
 void displayMenu() {
@@ -169,7 +162,6 @@ void displayOrbit() {
   //fill(255, 255, 0);
   textSize(14);
   fill(255);
-
   if (mode.equals("CHOOSING")) {
     text("Select one of the keys to pick a planet: ", 10, 20);
     text("0: Mercury", 10, 40);
@@ -182,7 +174,6 @@ void displayOrbit() {
     text("7: Neptune", 10, 180);
     text("8: Pluto", 10, 200);
     text("9: Create your own", 10, 220);
-    //mode = "CHOSEN";
   }    
   if (mode.equals("CHOSEN")) {
     text("Drop the planet by clicking the desired location", 10, 20);
@@ -287,6 +278,9 @@ void mouseClicked() {
     if (mouseX > width-100 && mouseX < width-10 && mouseY > 60 && mouseY < 110) { //Clear projectile screen
       toDisplayp.clear();
       toMovep.clear();
+      Projectile a = new Projectile(30, height-70, velocity, angle);
+      toDisplayp.add(a);
+      toMovep.add(a);
       mode = "ANGLESELECT";
     }
   }

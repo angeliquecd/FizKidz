@@ -46,7 +46,7 @@ class Projectile implements Displayable, Moveable {
     t+=speed;
     currentx = vx * t + initialx;
     currenty = -vy * t + 1/2*9.81*t*t + initialy;
-    println(currenty);
+    //println(currenty);
     //}
     //t=0;
     //float currentvy=vy;
