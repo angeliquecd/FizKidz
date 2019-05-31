@@ -35,8 +35,10 @@ color style;
   }
 
   void display() {
-    fill(255, 255, 0);
+    fill(style);
+    noStroke();
     ellipse(xCor, yCor, radius,radius);
+    stroke(0);
   }
    
 

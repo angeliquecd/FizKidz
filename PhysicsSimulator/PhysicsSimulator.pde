@@ -253,7 +253,7 @@ void mouseClicked() {
     if (mouseX > width-100 && mouseX < width-10 && mouseY > 60 && mouseY < 110) { //Clear planet screen
       toDisplay.clear();
       toMove.clear();
-      Planet sun = new Planet(sunX, sunY, 100, "Sun", 1, 0, yellow);
+      Planet sun = new Planet(sunX, sunY, 50, "Sun", 1, 0, yellow);
       toDisplay.add(sun);
       mode = "CHOOSING";
     }
