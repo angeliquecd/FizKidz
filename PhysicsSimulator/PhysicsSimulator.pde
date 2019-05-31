@@ -78,6 +78,7 @@ void draw() {
   background(255);
   //println(mode);
   if (simMode.equals("MENU")) {
+    setup();
     displayMenu();
   } else {
     fill(255);
@@ -100,7 +101,6 @@ void draw() {
       }
     }
     if (simMode.equals("PROJECTILE")) {
-
       displaylaunch();
       for (Displayable x : toDisplayp) {
         x.display();
