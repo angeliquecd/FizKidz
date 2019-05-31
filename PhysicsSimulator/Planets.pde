@@ -13,9 +13,9 @@ class Planet implements Displayable, Moveable {
   float b;
   float c;
   float period;
-color style;
+  color style;
   Planet(float x, float y, float rad, String nm, float ecc, float period, color colory) { //Planet class
-  style=colory;
+    style=colory;
     e=ecc;
     radius = rad*2; 
     mass = radius * radius * PI * 5.51;
@@ -37,10 +37,10 @@ color style;
   void display() {
     fill(style);
     noStroke();
-    ellipse(xCor, yCor, radius,radius);
+    ellipse(xCor, yCor, radius, radius);
     stroke(0);
   }
-   
+
 
   void move() { //will determine elliptical motion of each planet
     angle += speed;

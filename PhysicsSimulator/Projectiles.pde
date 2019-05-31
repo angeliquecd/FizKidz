@@ -32,15 +32,15 @@ class Projectile implements Displayable, Moveable {
     setupDisplay();
     fill(0, 0, 0);
     //triangle(currentx, currenty, initialx+20, initialy, initialx+10, initialy+13);
-    ellipse(currentx, currenty, 40,40);
+    ellipse(currentx, currenty, 40, 40);
     println(""+currentx+", "+currenty);
   }
-  
-   void setupDisplay() {
-    fill(124,252,0);
+
+  void setupDisplay() {
+    fill(124, 252, 0);
     rect(0, height - 50, width, 50);
   }
-  
+
   void move() {
     //while (currenty >= initialy) {
     t+=speed;
