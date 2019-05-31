@@ -1,4 +1,4 @@
-class Projectile implements Displayable, Moveable{
+class Projectile implements Displayable, Moveable {
   float initialx;
   float velocity;
   float initialy;
@@ -8,35 +8,56 @@ class Projectile implements Displayable, Moveable{
   float t;
   float currenty;
   float currentx;
+  float speed;
   float totaldistance;
-  Projectile(float startx, float starty,float totalv,float totala){
+
+  Projectile(float startx, float starty, float totalv, float totala) {
     initialx=startx;
     initialy=starty;
-    velocity= 80;
-    angle = radians(10);
+    velocity= totalv;
+    angle = radians(totala);
     println(sin(angle));
     vy= sin(angle)* velocity;
     vx=cos(angle)*velocity;
-    t=0;
+    t=0; //parameter for parametric equations, determined by time of flight equation: T = 2*vy/g
+    speed = 2;
     currentx=initialx;
     currenty=initialy;
     totaldistance=velocity*velocity*sin(2*angle)/9.8;
     println("Velocities: " +vx+", "+vy);
   }
-  void display(){
-    fill(0,0,0);
-    ellipse(currentx,currenty, 10,10);
-}
-void move(){
-  t=0;
-  while(currentx>0 &&currentx<totaldistance){//&& currenty>0 && currentx<width && currenty<height){
-  currentx=initialx+vx*t;
-  currenty=initialy+vy*t-4.9*t*t;
-  t+=.1;
- // fill(0,0,0);
-  //ellipse(initialx,initialy,5,5);
-  println("vy*t is: " +(vy*t)+ "4.9*t*t is: "+(4.9*t*t)+"difference is, "+(currenty-initialy)+" " + currenty);
+  void display() {
+    setupDisplay();
+    fill(0, 0, 0);
+    //triangle(currentx, currenty, initialx+20, initialy, initialx+10, initialy+13);
+    circle(currentx, currenty, 40);
   }
-}
-//range= velocty*sin(2*angle)
+  
+   void setupDisplay() {
+    fill(124,252,0);
+    rect(0, height - 50, width, 50);
+  }
+  
+  void move() {
+    //while (currenty >= initialy) {
+    t+=speed;
+    currentx = vx * t + initialx;
+    currenty = -vy * t + 1/2*9.81*t*t + initialy;
+    println(currenty);
+    //}
+    //t=0;
+    //float currentvy=vy;
+    //while (currentx>0 && currenty>0 && currentx<width && currenty<height) {
+    //  currentx=initialx+vx*t;
+    //  currentvy=-9.8*t+vy;
+    //  float highestheight=vy*vy/(2*9.8);
+    //  float totaltime=2*highestheight/vy;
+    //  if ( t<totaltime/2) currenty=initialy-vy*t;//+0.5*9.8*t*t;
+    //  else currenty=initialy+vy*t;
+    //  t+=speed;
+    //  println(""+ currentx+","+currenty+" "+t+", "+currentvy);
+    //  // fill(0,0,0);
+    //  //ellipse(initialx,initialy,5,5);
+    //}
+  }
 }
