@@ -8,10 +8,11 @@ class Projectile implements Displayable, Moveable{
   float t;
   float currenty;
   float currentx;
+  float totaldistance;
   Projectile(float startx, float starty,float totalv,float totala){
     initialx=startx;
     initialy=starty;
-    velocity= 10;
+    velocity= 80;
     angle = radians(10);
     println(sin(angle));
     vy= sin(angle)* velocity;
@@ -19,26 +20,23 @@ class Projectile implements Displayable, Moveable{
     t=0;
     currentx=initialx;
     currenty=initialy;
+    totaldistance=velocity*velocity*sin(2*angle)/9.8;
     println("Velocities: " +vx+", "+vy);
   }
   void display(){
     fill(0,0,0);
-    triangle(currentx,currenty, initialx+20,initialy,initialx+10,initialy+13);
+    ellipse(currentx,currenty, 10,10);
 }
 void move(){
   t=0;
-  float currentvy=vy;
-  while(currentx>0 && currenty>0 && currentx<width && currenty<height){
+  while(currentx>0 &&currentx<totaldistance){//&& currenty>0 && currentx<width && currenty<height){
   currentx=initialx+vx*t;
-  currentvy=-9.8*t+vy;
-  float highestheight=vy*vy/(2*9.8);
-  float totaltime=2*highestheight/vy;
-  if( t<totaltime/2) currenty=initialy-vy*t;//+0.5*9.8*t*t;
-  else currenty=initialy+vy*t;
-  t+=0.1;
-  println(""+ currentx+","+currenty+" "+t+", "+currentvy);
+  currenty=initialy+vy*t-4.9*t*t;
+  t+=.1;
  // fill(0,0,0);
   //ellipse(initialx,initialy,5,5);
+  println("vy*t is: " +(vy*t)+ "4.9*t*t is: "+(4.9*t*t)+"difference is, "+(currenty-initialy)+" " + currenty);
   }
 }
+//range= velocty*sin(2*angle)
 }
