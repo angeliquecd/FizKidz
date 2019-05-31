@@ -67,6 +67,8 @@ void setup() {
   toMove = new ArrayList<Moveable>();
   toDisplayp = new ArrayList<Displayable>();
   toMovep = new ArrayList<Moveable>();
+  Planet sun = new Planet(sunX, sunY, 100, "Sun", 1, 0, yellow);
+  toDisplay.add(sun);
 }
 
 void draw() {
@@ -86,8 +88,6 @@ void draw() {
       rect(width-110, 5, 100, 50);
       fill(255);
       text("Menu", width-75, 35); //Menu Button
-      Planet sun = new Planet(sunX, sunY, 100, "Sun", 1, 0, yellow);
-      toDisplay.add(sun);
       displayOrbit();
       for (Displayable x : toDisplay) { //displays all the things
         x.display();
