@@ -13,8 +13,9 @@ class Planet implements Displayable, Moveable {
   float b;
   float c;
   float period;
-
-  Planet(float x, float y, float rad, String nm, float ecc, float period) { //Planet class
+color style;
+  Planet(float x, float y, float rad, String nm, float ecc, float period, color colory) { //Planet class
+  style=colory;
     e=ecc;
     radius = rad; //radius of planet
     mass = radius * radius * PI * 5.51; //mass determined by size and density
@@ -34,7 +35,7 @@ class Planet implements Displayable, Moveable {
   }
 
   void display() {
-    fill(255, 255, 0);
+    fill(style);
     circle(xCor, yCor, radius);
   }
    
