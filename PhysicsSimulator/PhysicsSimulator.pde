@@ -1,6 +1,6 @@
 import java.util.*;
 final float sunX = 500;
-final float sunY = 500;
+final float sunY = 400;
 final float G = 667.408;
 boolean sun = true;
 boolean mercury = false;
@@ -75,12 +75,14 @@ void draw() {
   if (simMode.equals("MENU")) {
     displayMenu();
   } else {
-    fill(255);
-    rect(width-110, 5, 100, 50);
+    background(0);
+    stroke(255);
     fill(0);
+    rect(width-110, 5, 100, 50);
+    fill(255);
     text("Menu", width-75, 35); //Menu Button
     if (simMode.equals("ORBIT")) {
-      Planet sun = new Planet(sunX, sunY, 50, "Sun", 1, 0, yellow);
+      Planet sun = new Planet(sunX, sunY, 100, "Sun", 1, 0, yellow);
       toDisplay.add(sun);
       displayOrbit();
       for (Displayable x : toDisplay) { //displays all the things
@@ -154,14 +156,15 @@ void displayMenu() {
 }
 
 void displayOrbit() {
-  fill(255);
-  rect(width-110, 60, 100, 50);
+  stroke(255);
   fill(0);
+  rect(width-110, 60, 100, 50);
+  fill(255);
   text("Clear", width-75, 90); //Clear button
   //fill(0, 0, 0);
   //fill(255, 255, 0);
   textSize(14);
-  fill(0);
+  fill(255);
   if (mode.equals("CHOOSING")) {
     text("Select one of the keys to pick a planet: ", 10, 20);
     text("0: Mercury", 10, 40);
@@ -253,7 +256,7 @@ void mouseClicked() {
     if (mouseX > width-100 && mouseX < width-10 && mouseY > 60 && mouseY < 110) { //Clear planet screen
       toDisplay.clear();
       toMove.clear();
-      Planet sun = new Planet(sunX, sunY, 50, "Sun", 1, 0, yellow);
+      Planet sun = new Planet(sunX, sunY, 100, "Sun", 1, 0, yellow);
       toDisplay.add(sun);
       mode = "CHOOSING";
     }
