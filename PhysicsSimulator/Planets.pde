@@ -16,7 +16,7 @@ class Planet implements Displayable, Moveable {
 
   Planet(float x, float y, float rad, String nm, float ecc, float period) { //Planet class
     e=ecc;
-    radius = rad; 
+    radius = rad*2; 
     mass = radius * radius * PI * 5.51;
     xCor = x;
     yCor = y;
@@ -35,7 +35,7 @@ class Planet implements Displayable, Moveable {
 
   void display() {
     fill(255, 255, 0);
-    circle(xCor, yCor, radius);
+    ellipse(xCor, yCor, radius,radius);
   }
 
   void move() { //will determine elliptical motion of each planet
