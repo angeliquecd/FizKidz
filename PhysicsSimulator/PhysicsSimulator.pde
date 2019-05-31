@@ -75,13 +75,18 @@ void draw() {
   if (simMode.equals("MENU")) {
     displayMenu();
   } else {
-    background(0);
-    stroke(255);
+    fill(255);
+    rect(width-110, 5, 100, 50);
+    fill(0);
+    text("Menu", width-75, 35); //Menu Button
+    if (simMode.equals("ORBIT")) {
+      
+       background(0);
+          stroke(255);
     fill(0);
     rect(width-110, 5, 100, 50);
     fill(255);
     text("Menu", width-75, 35); //Menu Button
-    if (simMode.equals("ORBIT")) {
       Planet sun = new Planet(sunX, sunY, 100, "Sun", 1, 0, yellow);
       toDisplay.add(sun);
       displayOrbit();
@@ -165,6 +170,7 @@ void displayOrbit() {
   //fill(255, 255, 0);
   textSize(14);
   fill(255);
+
   if (mode.equals("CHOOSING")) {
     text("Select one of the keys to pick a planet: ", 10, 20);
     text("0: Mercury", 10, 40);

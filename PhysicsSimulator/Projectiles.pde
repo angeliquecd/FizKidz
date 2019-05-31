@@ -19,6 +19,8 @@ class Projectile implements Displayable, Moveable {
     println(sin(angle));
     vy= sin(angle)* velocity;
     vx=cos(angle)*velocity;
+    vx/=10;
+    vy/=10;
     t=0; //parameter for parametric equations, determined by time of flight equation: T = 2*vy/g
     speed = 2;
     currentx=initialx;
@@ -31,6 +33,7 @@ class Projectile implements Displayable, Moveable {
     fill(0, 0, 0);
     //triangle(currentx, currenty, initialx+20, initialy, initialx+10, initialy+13);
     ellipse(currentx, currenty, 40,40);
+    println(""+currentx+", "+currenty);
   }
   
    void setupDisplay() {
