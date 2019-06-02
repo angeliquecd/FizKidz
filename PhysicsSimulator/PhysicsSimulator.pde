@@ -48,8 +48,7 @@ interface Moveable {
 
 ArrayList<Displayable> toDisplay;
 ArrayList<Moveable> toMove;
-ArrayList<Displayable> toDisplayp;
-ArrayList<Moveable> toMovep;
+
 Planet Sun = new Planet(sunX, sunY, 100, "Sun", 1, 0, yellow);
 Projectile a = new Projectile(30, 730, velocity, angle);
 
@@ -67,11 +66,7 @@ void setup() {
   //pushMatrix();
   toDisplay = new ArrayList<Displayable>();
   toMove = new ArrayList<Moveable>();
-  toDisplayp = new ArrayList<Displayable>();
-  toMovep = new ArrayList<Moveable>();
   toDisplay.add(Sun);
-  toDisplayp.add(a);
-  toMovep.add(a);
 }
 
 void draw() {
@@ -102,13 +97,9 @@ void draw() {
     }
     if (simMode.equals("PROJECTILE")) {
       displaylaunch();
-      for (Displayable x : toDisplayp) {
-        x.display();
-      }
+      a.display();
       if (mode.equals("EXECUTING")) {
-        for (Moveable y : toMovep) {
-          y.move();
-        }
+        a.move();
       }
     }
   }
@@ -252,7 +243,6 @@ void mouseClicked() {
     if (mouseX > width-100 && mouseX < width-10 && mouseY > 60 && mouseY < 110) { //Clear planet screen
       toDisplay.clear();
       toMove.clear();
-      //Planet Sun = new Planet(sunX, sunY, 100, "Sun", 1, 0, yellow);
       toDisplay.add(Sun);
       mode = "CHOOSING";
     }
@@ -267,19 +257,8 @@ void mouseClicked() {
       if (mode.equals("ANGLESELECT") && angle>0) angle-=1;
       else if (velocity>0) velocity-=1;
     }
-    //if (mode.equals("SPOTFINDER")) {
-    //  //Projectile a = new Projectile(mouseX, mouseY, velocity, angle);
-    //  mode="EXECUTING";
-    //  velocity=0;
-    //  angle=0;
-    //  //toDisplayp.add(a);
-    //  //toMovep.add(a);
-    //}
     if (mouseX > width-100 && mouseX < width-10 && mouseY > 60 && mouseY < 110) { //Clear projectile screen
-      toDisplayp.clear();
-      toMovep.clear();
-      toDisplayp.add(a);
-      toMovep.add(a);
+      a = new Projectile(30, 730, velocity, angle);
       mode = "ANGLESELECT";
     }
   }
