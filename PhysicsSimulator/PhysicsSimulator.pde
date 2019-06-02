@@ -50,6 +50,8 @@ ArrayList<Displayable> toDisplay;
 ArrayList<Moveable> toMove;
 ArrayList<Displayable> toDisplayp;
 ArrayList<Moveable> toMovep;
+Planet Sun = new Planet(sunX, sunY, 100, "Sun", 1, 0, yellow);
+Projectile a = new Projectile(30, 730, velocity, angle);
 
 void drawGrid() {
   for (int x =0; x<width; x+=10) {
@@ -67,9 +69,7 @@ void setup() {
   toMove = new ArrayList<Moveable>();
   toDisplayp = new ArrayList<Displayable>();
   toMovep = new ArrayList<Moveable>();
-  Planet sun = new Planet(sunX, sunY, 100, "Sun", 1, 0, yellow);
-  toDisplay.add(sun);
-  Projectile a = new Projectile(30, height-70, velocity, angle);
+  toDisplay.add(Sun);
   toDisplayp.add(a);
   toMovep.add(a);
 }
@@ -252,8 +252,8 @@ void mouseClicked() {
     if (mouseX > width-100 && mouseX < width-10 && mouseY > 60 && mouseY < 110) { //Clear planet screen
       toDisplay.clear();
       toMove.clear();
-      Planet sun = new Planet(sunX, sunY, 100, "Sun", 1, 0, yellow);
-      toDisplay.add(sun);
+      //Planet Sun = new Planet(sunX, sunY, 100, "Sun", 1, 0, yellow);
+      toDisplay.add(Sun);
       mode = "CHOOSING";
     }
   }
@@ -278,7 +278,6 @@ void mouseClicked() {
     if (mouseX > width-100 && mouseX < width-10 && mouseY > 60 && mouseY < 110) { //Clear projectile screen
       toDisplayp.clear();
       toMovep.clear();
-      Projectile a = new Projectile(30, height-70, velocity, angle);
       toDisplayp.add(a);
       toMovep.add(a);
       mode = "ANGLESELECT";
@@ -324,7 +323,10 @@ void keyPressed() {
   if (simMode.equals("PROJECTILE")) {
     if (mode.equals("ANGLESELECT")) {
       if (keyCode==ENTER) mode = "VELOCITYSELECT";
-    } else if (mode.equals("VELOCITYSELECT")) mode = "EXECUTING";
+    } else if (mode.equals("VELOCITYSELECT")) {
+      a = new Projectile(30, 730, velocity, angle);
+      mode = "EXECUTING";
+    }
   }
 }
 /*void mousePressed(){
