@@ -2,6 +2,7 @@ import java.util.*;
 final float sunX = 500;
 final float sunY = 400;
 final float G = 667.408;
+int slider=0;
 boolean sun = true;
 boolean mercury = false;
 boolean venus = false;
@@ -118,21 +119,28 @@ void displaylaunch() {
       text ("Angle is: "+ angle +" ˚", 10, 240);
     }
     if (mode.equals("VELOCITYSELECT")) {
-      text("Set the initial launch velocity of the projectile by clicking the up-down arrows", 10, 20);
+      text("Set the initial launch velocity of the projectile by sliding the slider", 10, 20);
       text("Hit enter once you've selected your velocity", 10, 40);
       text ("Velocity is: "+ velocity +" m/s", 10, 240);
     }
-    fill(255);
+    rect(30,100,255,60);
+    fill(100,0,0);
+    rect(30+slider,90,20,80);
+   /* fill(255);
     rect(10, 100, 110, 60);
     fill (0, 0, 0);
     triangle(45, 150, 75, 150, 60, 120);
     fill(255);
     rect(10, 160, 110, 60);
     fill(0, 0, 0);
-    triangle(45, 180, 75, 180, 60, 210);
+    triangle(45, 180, 75, 180, 60, 210);*/
   }
 }
-
+void mouseDragged(){
+  if(mouseX>20 && mouseX<280){
+  slider=mouseX-30;
+  }
+}
 void displayMenu() {
   rect(width/2-200, height/2-200, 400, 100);
   rect(width/2-200, height/2-100, 400, 100);
