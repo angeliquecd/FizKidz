@@ -35,7 +35,7 @@ color uranusblue = color(53, 201, 165);//uranus
 color jbrown = color(247, 208, 160); //jupiter
 color sorange= color(245, 147, 27);
 Random rcolor = new Random();
-color randcolor = color(rcolor.nextInt()%255, rcolor.nextInt()%255, rcolor.nextInt()%255);
+color randcolor = color(rcolor.nextInt()%200+55, rcolor.nextInt()%200+55, rcolor.nextInt()%200+55);
 //controls moving sliders
 int slider=0;
 import java.util.*;
@@ -145,7 +145,7 @@ void mouseDragged(){
     else velocity=(mouseX-21)/4;
   }
   else {
-     if (mode.equals("CUSTOM")) massy=(mouseX-21)/10;
+     if (mode.equals("CUSTOM")) massy=(mouseX-21)/20/26.0;
      else radiussy=(mouseX-21)/5;
   }
   }
@@ -246,7 +246,7 @@ void mouseClicked() {
         p = new Planet(mouseX, mouseY, 0.8, "Pluto", .25, 248, gray);
         pluto=false;
       } else {
-        p = new Planet(mouseX, mouseY, radiussy/10, "Custom", massy%0.0001, 45, randcolor); //have to choose interactively
+        p = new Planet(mouseX, mouseY, radiussy/10, "Custom", massy, 45, randcolor); //have to choose interactively
       massy=0;
       radiussy=0;
     }
