@@ -123,9 +123,11 @@ void displaylaunch() {
       text("Hit enter once you've selected your velocity", 10, 40);
       text ("Velocity is: "+ velocity +" m/s", 10, 240);
     }
-    rect(30,100,255,60);
-    fill(100,0,0);
-    rect(30+slider,90,20,80);
+    noStroke();
+    fill(178,192,196);
+    rect(30,100,266,50);
+    fill(76,198,227);
+    rect(30+slider,85,20,80);
    /* fill(255);
     rect(10, 100, 110, 60);
     fill (0, 0, 0);
@@ -137,8 +139,10 @@ void displaylaunch() {
   }
 }
 void mouseDragged(){
-  if(mouseX>20 && mouseX<280){
+  if(mouseX>20 && mouseX<291){
   slider=mouseX-30;
+  if (mode.equals("ANGLESELECT")) angle=(mouseX-21)/3;
+  else velocity=(mouseX-21)/4;
   }
 }
 void displayMenu() {
@@ -309,10 +313,14 @@ void keyPressed() {
   }
   if (simMode.equals("PROJECTILE")) {
     if (mode.equals("ANGLESELECT")) {
-      if (keyCode==ENTER) mode = "VELOCITYSELECT";
+      if (keyCode==ENTER) {
+        mode = "VELOCITYSELECT";
+        slider=0;
+      }
     } else if (mode.equals("VELOCITYSELECT")) {
       a = new Projectile(30, 730, velocity, angle);
       mode = "EXECUTING";
+      slider=0;
     }
   }
 }
