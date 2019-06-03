@@ -30,8 +30,6 @@ class Planet implements Displayable, Moveable {
     b = (float)Math.sqrt(a*a - c*c);
     centerx = sunX + (c/(a+c))*(xCor - sunX);
     centery = sunY + (c/(a+c))*(yCor - sunY);
-    //println(a);
-    //println(period);
   }
 
   void display() {

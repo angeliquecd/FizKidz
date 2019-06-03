@@ -22,14 +22,11 @@ class Projectile implements Displayable, Moveable {
     speed = 1;
     currentx=initialx;
     currenty=initialy;
-    //totaldistance=velocity*velocity*sin(2*angle)/9.8;
-    //println("Velocities: " +vx+", "+vy);
   }
   void display() {
     setupDisplay();
     fill(0, 0, 0);
     ellipse(currentx, currenty, 40, 40);
-    //println(""+currentx+", "+currenty);
   }
 
   void setupDisplay() {
