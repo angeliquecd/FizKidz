@@ -2,7 +2,6 @@ import java.util.*;
 final float sunX = 500;
 final float sunY = 400;
 final float G = 667.408;
-int slider=0;
 boolean sun = true;
 boolean mercury = false;
 boolean venus = false;
@@ -18,11 +17,13 @@ String simMode = "MENU";
 //possible simmodes are menu, projectile and orbits
 String mode= "CHOOSING";
 //modes for orbit are choosing, chosen, custom and custom2
-//modes for projectile are velocityselector, angleselector and execute
+//modes for projectile are velocityselector, angleselector and executing
+//custom planets and projectile stuff
 float massy =0;
 float radiussy =0;
 int angle=0;
 int velocity =0;
+//controls colors
 color brown = color(139, 74, 74);//mercury
 color red = color(209, 34, 98);//mars
 color earthblue= color(34, 209, 193);//earth
@@ -34,8 +35,9 @@ color uranusblue = color(53, 201, 165);//uranus
 color jbrown = color(247, 208, 160); //jupiter
 color sorange= color(245, 147, 27);
 Random rcolor = new Random();
-color randcolor = color(rcolor.nextInt(), rcolor.nextInt(), rcolor.nextInt());
-
+color randcolor = color(rcolor.nextInt()%255, rcolor.nextInt()%255, rcolor.nextInt()%255);
+//controls moving sliders
+int slider=0;
 import java.util.*;
 ArrayList<Planet> planets = new ArrayList<Planet>(); //keep track of all planets
 
@@ -90,18 +92,15 @@ void draw() {
       text("Menu", width-75, 35); //Menu Button
       displayOrbit();
       for (Displayable x : toDisplay) { //displays all the things
-        x.display();
-      }
+        x.display();}
       for (Moveable x : toMove) {
-        x.move();
-      }
+        x.move();}
     }
     if (simMode.equals("PROJECTILE")) {
       displaylaunch();
       a.display();
       if (mode.equals("EXECUTING")) {
-        a.move();
-      }
+        a.move();}
     }
   }
 }
@@ -141,8 +140,14 @@ void displaylaunch() {
 void mouseDragged(){
   if(mouseX>20 && mouseX<291){
   slider=mouseX-30;
-  if (mode.equals("ANGLESELECT")) angle=(mouseX-21)/3;
-  else velocity=(mouseX-21)/4;
+  if (simMode.equals("PROJECTILE")){
+    if (mode.equals("ANGLESELECT")) angle=(mouseX-21)/3;
+    else velocity=(mouseX-21)/4;
+  }
+  else {
+     if (mode.equals("CUSTOM")) massy=(mouseX-21)/10;
+     else radiussy=(mouseX-21)/5;
+  }
   }
 }
 void displayMenu() {
@@ -184,23 +189,28 @@ void displayOrbit() {
   }
   if (mode.equals("CUSTOM") || mode.equals("CUSTOM2")) {
     if (mode.equals("CUSTOM")) {
-      text("Set the eccentricity of the planet by clicking the up-down arrows", 10, 20);
+      text("Set the eccentricity of the planet by sliding the slider", 10, 20);
       text("Hit enter once you've selected your eccentricity", 10, 40);
       text ("Eccentricity is: "+ massy, 10, 240);
     }
     if (mode.equals("CUSTOM2")) {
-      text("Set the radius of the planet by clicking the up-down arrows", 10, 20);
+      text("Set the radius of the planet by sliding the slider", 10, 20);
       text("Hit enter once you've selected your radius", 10, 40);
       text ("Radius is: "+ radiussy +" km", 10, 240);
     }
-    fill(255);
+     noStroke();
+    fill(178,192,196);
+    rect(30,100,266,50);
+    fill(76,198,227);
+    rect(30+slider,85,20,80);
+   /* fill(255);
     rect(10, 100, 110, 60);
     fill (0, 0, 0);
     triangle(45, 150, 75, 150, 60, 120);
     fill(255);
     rect(10, 160, 110, 60);
     fill(0, 0, 0);
-    triangle(45, 180, 75, 180, 60, 210);
+    triangle(45, 180, 75, 180, 60, 210);*/
   }
 }
 
@@ -237,7 +247,9 @@ void mouseClicked() {
         pluto=false;
       } else {
         p = new Planet(mouseX, mouseY, radiussy/10, "Custom", massy%0.0001, 45, randcolor); //have to choose interactively
-      }
+      massy=0;
+      radiussy=0;
+    }
       toDisplay.add(p);
       toMove.add(p);
       mode="CHOOSING";
@@ -261,14 +273,14 @@ void mouseClicked() {
   }
   if (simMode.equals("PROJECTILE")) {
     //  println(""+mouseX+", "+mouseY);
-    if (mouseX>10 && mouseY>100 && mouseX<120 && mouseY<160) {
+   /* if (mouseX>10 && mouseY>100 && mouseX<120 && mouseY<160) {
       if (mode.equals("ANGLESELECT")) angle+=1;
       else velocity+=1;
     }
     if (mouseX>10 && mouseY>160 && mouseX<120 && mouseY<220) {
       if (mode.equals("ANGLESELECT") && angle>0) angle-=1;
       else if (velocity>0) velocity-=1;
-    }
+    }*/
     if (mouseX > width-100 && mouseX < width-10 && mouseY > 60 && mouseY < 110) { //Clear projectile screen
       a = new Projectile(30, 730, velocity, angle);
       mode = "ANGLESELECT";
@@ -306,9 +318,11 @@ void keyPressed() {
     if (mode.equals("CUSTOM")) {
       if (keyCode==ENTER) {
         mode="CUSTOM2";
+        slider=0;
       }
     } else if (mode.equals("CUSTOM2")) {
       if (keyCode==ENTER) mode="CHOSEN";
+      slider=0;
     }
   }
   if (simMode.equals("PROJECTILE")) {
