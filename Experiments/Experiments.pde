@@ -426,16 +426,14 @@ class Projectile implements Displayable, Moveable {
     initialx=startx;
     initialy=starty;
     velocity= totalv;
-    angle = totala;
-    vy=sin(radians(angle))*velocity;
-    vx=cos(radians(angle))*velocity;
-    vx/=10;
-    vy/=10;
+    angle = radians(totala);
+    vy= sin(angle)*velocity/10;
+    vx= cos(angle)*velocity/10;
     t=0; //parameter for parametric equations, determined by time of flight equation: T = 2*vy/g
-    speed = 2;
+    speed = 1;
     currentx=initialx;
     currenty=initialy;
-    totaldistance=velocity*velocity*sin(2*radians(angle))/9.8;
+    //totaldistance=velocity*velocity*sin(2*angle)/9.8;
     //println("Velocities: " +vx+", "+vy);
   }
   void display() {
@@ -453,10 +451,10 @@ class Projectile implements Displayable, Moveable {
   }
 
   void move() {
-    //while (t <= 2 * vy / 9.81) {
+    if (currenty <= initialy) {
       t+=speed;
-      currentx = -cos(radians(angle-450))*velocity + initialx;
-      currenty = -sin(radians(angle-450))*velocity + initialy;
-    //}
+      currentx = vx * t + initialx;
+      currenty = .5*.00981*t*t - vy*t + initialy;
+    }
   }
 }
