@@ -43,4 +43,12 @@ class Projectile implements Displayable, Moveable {
       currenty = .5*.00981*t*t - vy*t + initialy;
     }
   }
+  
+  float getX() {
+   return currentx; 
+  }
+  
+  float getY() {
+   return currenty; 
+  }
 }
