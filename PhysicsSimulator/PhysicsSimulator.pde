@@ -142,12 +142,16 @@ void mouseDragged() {
   }
 }
 void displayMenu() {
-  rect(width/2-200, height/2-200, 400, 100);
+  textSize(50);
+  fill(0);
+  text("Welcome to Physics Simulator!", width/2-360, height/2-200);
+  fill(255);
   rect(width/2-200, height/2-100, 400, 100);
+  rect(width/2-200, height/2, 400, 100);
   fill(0);
   textSize(32);
-  text("Planetary Orbit", width/2-110, height/2-150);
-  text("Projectile Motion", width/2-120, height/2-50);
+  text("Planetary Orbit", width/2-110, height/2-50);
+  text("Projectile Motion", width/2-120, height/2+50);
   fill(255);
 }
 
@@ -262,10 +266,10 @@ void mouseClicked() {
     }
   }
   if (simMode.equals("MENU")) {
-    if (mouseX> width/2-200 && mouseX < width/2+200 && mouseY > height/2-200 && mouseY < height/2-100) {
+    if (mouseX> width/2-200 && mouseX < width/2+200 && mouseY > height/2-100 && mouseY < height/2) {
       simMode="ORBIT";
     }
-    if (mouseX> width/2-200 && mouseX < width/2+200 && mouseY > height/2-100 && mouseY < height/2) {
+    if (mouseX> width/2-200 && mouseX < width/2+200 && mouseY > height/2 && mouseY < height/2+100) {
       simMode="PROJECTILE";
       mode="ANGLESELECT";
     }
