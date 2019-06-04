@@ -1,12 +1,13 @@
 # FizKidz
 ## Final Project II
 
+### Project Description:
 
-## Project Description:
+--------------------
+### Directions:
 
-## Directions:
-
-## Development Log:
+--------------------
+### Development Log:
 **Weekend (5/18 - 5/19):**
 *Experimenting with different ways of creating planets when clicking the mouse. Also trying to figure out how to determine the elliptical orbit of a planet around the sun given the sun as a focus and planet as a vertex.*
 
