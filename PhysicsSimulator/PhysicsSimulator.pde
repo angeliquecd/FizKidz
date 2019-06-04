@@ -35,7 +35,7 @@ color uranusblue = color(53, 201, 165);//uranus
 color jbrown = color(247, 208, 160); //jupiter
 color sorange= color(245, 147, 27);
 Random rcolor = new Random();
-color randcolor = color(rcolor.nextInt()%255, rcolor.nextInt()%255, rcolor.nextInt()%255);
+color randcolor; 
 //controls moving sliders
 int slider=0;
 import java.util.*;
@@ -70,8 +70,6 @@ void drawGrid() {
 
 void setup() {
   size(1000, 800);
-  //background(255);
-  //pushMatrix();
   toDisplay = new ArrayList<Displayable>();
   toMove = new ArrayList<Moveable>();
   toDisplay.add(Sun);
@@ -79,7 +77,6 @@ void setup() {
 
 void draw() {
   background(255);
-  //println(mode);
   if (simMode.equals("MENU")) {
     setup();
     displayMenu();
@@ -97,9 +94,11 @@ void draw() {
       text("Menu", width-75, 35); //Menu Button
       displayOrbit();
       for (Displayable x : toDisplay) { //displays all the things
-        x.display();}
+        x.display();
+      }
       for (Moveable x : toMove) {
-        x.move();}
+        x.move();
+      }
     }
     if (simMode.equals("PROJECTILE")) {
       displaylaunch();
@@ -107,7 +106,6 @@ void draw() {
       if (mode.equals("EXECUTING")) {
         a.move();}
     }}}
-
 void displaylaunch() {
   fill(255);
   rect(width-110, 60, 100, 50);
@@ -116,7 +114,7 @@ void displaylaunch() {
   if (mode.equals("ANGLESELECT") || mode.equals("VELOCITYSELECT")) {
     textSize(14);
     if (mode.equals("ANGLESELECT")) {
-      text("Set the initial launch angle of the projectile by clicking the up-down arrows", 10, 20);
+      text("Set the initial launch angle of the projectile by sliding the slider", 10, 20);
       text("Hit enter once you've selected your angle", 10, 40);
       text ("Angle is: "+ angle +" ˚", 10, 240);
     }
@@ -126,40 +124,35 @@ void displaylaunch() {
       text ("Velocity is: "+ velocity +" m/s", 10, 240);
     }
     noStroke();
-    fill(178,192,196);
-    rect(30,100,266,50);
-    fill(76,198,227);
-    rect(30+slider,85,20,80);
-   /* fill(255);
-    rect(10, 100, 110, 60);
-    fill (0, 0, 0);
-    triangle(45, 150, 75, 150, 60, 120);
-    fill(255);
-    rect(10, 160, 110, 60);
-    fill(0, 0, 0);
-    triangle(45, 180, 75, 180, 60, 210);*/
+    fill(178, 192, 196);
+    rect(30, 100, 266, 50);
+    fill(76, 198, 227);
+    rect(30+slider, 85, 20, 80);
   }
 }
-void mouseDragged(){
-  if(mouseX>20 && mouseX<291){
-  slider=mouseX-30;
-  if (simMode.equals("PROJECTILE")){
-    if (mode.equals("ANGLESELECT")) angle=(mouseX-21)/3;
-    else velocity=(mouseX-21)/4;
-  }
-  else {
-     if (mode.equals("CUSTOM")) massy=(mouseX-21)/10;
-     else radiussy=(mouseX-21)/5;
-  }
+void mouseDragged() {
+  if (mouseX>20 && mouseX<291) {
+    slider=mouseX-30;
+    if (simMode.equals("PROJECTILE")) {
+      if (mode.equals("ANGLESELECT")) angle=(mouseX-21)/3;
+      else velocity=(mouseX-21)*30/267;
+    } else {
+      if (mode.equals("CUSTOM")) massy=(mouseX-21)/20/26.0;
+      else radiussy=(mouseX-21)/5;
+    }
   }
 }
 void displayMenu() {
-  rect(width/2-200, height/2-200, 400, 100);
+  textSize(50);
+  fill(0);
+  text("Welcome to Physics Simulator!", width/2-360, height/2-200);
+  fill(255);
   rect(width/2-200, height/2-100, 400, 100);
+  rect(width/2-200, height/2, 400, 100);
   fill(0);
   textSize(32);
-  text("Planetary Orbit", width/2-110, height/2-150);
-  text("Projectile Motion", width/2-120, height/2-50);
+  text("Planetary Orbit", width/2-110, height/2-50);
+  text("Projectile Motion", width/2-120, height/2+50);
   fill(255);
 }
 
@@ -169,8 +162,6 @@ void displayOrbit() {
   rect(width-110, 60, 100, 50);
   fill(255);
   text("Clear", width-75, 90); //Clear button
-  //fill(0, 0, 0);
-  //fill(255, 255, 0);
   textSize(14);
   fill(255);
   if (mode.equals("CHOOSING")) {
@@ -201,19 +192,11 @@ void displayOrbit() {
       text("Hit enter once you've selected your radius", 10, 40);
       text ("Radius is: "+ radiussy +" km", 10, 240);
     }
-     noStroke();
-    fill(178,192,196);
-    rect(30,100,266,50);
-    fill(76,198,227);
-    rect(30+slider,85,20,80);
-   /* fill(255);
-    rect(10, 100, 110, 60);
-    fill (0, 0, 0);
-    triangle(45, 150, 75, 150, 60, 120);
-    fill(255);
-    rect(10, 160, 110, 60);
-    fill(0, 0, 0);
-    triangle(45, 180, 75, 180, 60, 210);*/
+    noStroke();
+    fill(178, 192, 196);
+    rect(30, 100, 266, 50);
+    fill(76, 198, 227);
+    rect(30+slider, 85, 20, 80);
   }
 }
 
@@ -249,10 +232,11 @@ void mouseClicked() {
         p = new Planet(mouseX, mouseY, 0.8, "Pluto", .25, 248, gray);
         pluto=false;
       } else {
-        p = new Planet(mouseX, mouseY, radiussy/10, "Custom", massy%0.0001, 45, randcolor); //have to choose interactively
-      massy=0;
-      radiussy=0;
-    }
+        randcolor = color(rcolor.nextInt()%155+100, rcolor.nextInt()%155+100, rcolor.nextInt()%155+100);
+        p = new Planet(mouseX, mouseY, radiussy/10, "Custom", massy, 45, randcolor); //have to choose interactively
+        massy=0;
+        radiussy=0;
+      }
       toDisplay.add(p);
       toMove.add(p);
       mode="CHOOSING";
@@ -275,25 +259,18 @@ void mouseClicked() {
     }
   }
   if (simMode.equals("PROJECTILE")) {
-    //  println(""+mouseX+", "+mouseY);
-   /* if (mouseX>10 && mouseY>100 && mouseX<120 && mouseY<160) {
-      if (mode.equals("ANGLESELECT")) angle+=1;
-      else velocity+=1;
-    }
-    if (mouseX>10 && mouseY>160 && mouseX<120 && mouseY<220) {
-      if (mode.equals("ANGLESELECT") && angle>0) angle-=1;
-      else if (velocity>0) velocity-=1;
-    }*/
     if (mouseX > width-100 && mouseX < width-10 && mouseY > 60 && mouseY < 110) { //Clear projectile screen
+      angle = 0;
+      velocity = 0;
       a = new Projectile(30, 730, velocity, angle);
       mode = "ANGLESELECT";
     }
   }
   if (simMode.equals("MENU")) {
-    if (mouseX> width/2-200 && mouseX < width/2+200 && mouseY > height/2-200 && mouseY < height/2-100) {
+    if (mouseX> width/2-200 && mouseX < width/2+200 && mouseY > height/2-100 && mouseY < height/2) {
       simMode="ORBIT";
     }
-    if (mouseX> width/2-200 && mouseX < width/2+200 && mouseY > height/2-100 && mouseY < height/2) {
+    if (mouseX> width/2-200 && mouseX < width/2+200 && mouseY > height/2 && mouseY < height/2+100) {
       simMode="PROJECTILE";
       mode="ANGLESELECT";
     }
@@ -341,37 +318,3 @@ void keyPressed() {
     }
   }
 }
-/*void mousePressed(){
- while (mousePressed){
- if (mode.equals("CUSTOM") || mode.equals("CUSTOM2")) {
- if (mouseX>10 && mouseY>100 && mouseX<120 && mouseY<160) {
- if (mode.equals("CUSTOM")) massy+=0.01;
- else radiussy+=10;
- }
- if (mouseX>10 && mouseY>160 && mouseX<120 && mouseY<220) {
- if (mode.equals("CUSTOM") && massy>0) massy-=.010;
- else if (radiussy>0) radiussy-=10;
- }
- }
- if (simMode.equals("PROJECTILE")) {
- //  println(""+mouseX+", "+mouseY);
- if (mouseX>10 && mouseY>100 && mouseX<120 && mouseY<160) {
- if (mode.equals("ANGLESELECT")) angle+=1;
- else velocity+=1;
- }
- if (mouseX>10 && mouseY>160 && mouseX<120 && mouseY<220) {
- if (mode.equals("ANGLESELECT") && angle>0) angle-=1;
- else if (velocity>0) velocity-=1;
- }
- //if (mode.equals("SPOTFINDER")) {
- //  //Projectile a = new Projectile(mouseX, mouseY, velocity, angle);
- //  mode="EXECUTING";
- //  velocity=0;
- //  angle=0;
- //  //toDisplayp.add(a);
- //  //toMovep.add(a);
- //}
- 
- }
- }
- }*/

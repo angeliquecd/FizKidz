@@ -1,8 +1,17 @@
 # FizKidz
 ## Final Project II
 
-### Development Log:
+### Project Description:
+This project consists of two different physics simulations.
+The planetary model allows the user to choose from one of the 9 existing planets and place them anywhere they wish so that they orbit around the sun, allowing the user to imagine alternatives to the solar system we live in. The user can also create their own planet by selecting the orbit's eccentricity and its size. This planet will move in orbit with the other planets according to the parameters set by the user.
+The projectile model allows the user to select the initial launch angle of a projectile and the initial velocity. The simulation will then play until the user hits clear and chooses a new angle and velocity.
 
+--------------------
+### Directions:
+Run the file PhysicsSimulator.pde. From there, select either the planetary orbit simulation or the projectile simulation. Follow the prompts on the screen to explore the simulations. Click clear to restart your simulation, and click menu to return to the starting menu.
+
+--------------------
+### Development Log:
 **Weekend (5/18 - 5/19):**
 *Experimenting with different ways of creating planets when clicking the mouse. Also trying to figure out how to determine the elliptical orbit of a planet around the sun given the sun as a focus and planet as a vertex.*
 
@@ -34,9 +43,10 @@
 * Angelique: *Made it so that every planet in the planet simulation would have the proper corresponding color and the make-your-own had a randomly assigned color.*
 * Aditi: *Fixed the issue in the planetary orbit where planets jumped to the wrong coordinates when placed. Also started working more on the projectile motion model by setting up the correct parametric equations for move() and creating a basic template for display().*
 
-**Friday 5/31**
+**Friday 5/31:**
 * Angelique: *Worked on the background colors of the solar system (changed to black to look like outer space) and changing the button colors, while fixing merging errors. Also fixed planet sizing and tested the program on a school computer.*
 * Aditi: *Continued to fix the math of the projectile on paper and in the code.*
 
-**Monday 6/03**
-* Angelique: *Worked on changing the setup of the selectors by switching to sliders, which are easier to use. Fixed a bug with planet colors and started working on a colliding method for planets*
+**Weekend 6/1 - 6/4:**
+* Angelique: *Worked on making the selection of variable values easier by adding sliders for eccentricity, radius, velocity, and angle. Also debugged an issue with the random color generation for custom planet selections.*
+* Aditi: *Debugged projectile motion so that velocity and angle updated immediately and so that the projectile moved in the proper parabolic motion. Also updated the menu screen and other text messages.*
