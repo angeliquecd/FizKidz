@@ -35,7 +35,7 @@ color uranusblue = color(53, 201, 165);//uranus
 color jbrown = color(247, 208, 160); //jupiter
 color sorange= color(245, 147, 27);
 Random rcolor = new Random();
-color randcolor = color(rcolor.nextInt()%200+55, rcolor.nextInt()%200+55, rcolor.nextInt()%200+55);
+color randcolor; 
 //controls moving sliders
 int slider=0;
 import java.util.*;
@@ -113,7 +113,7 @@ void displaylaunch() {
   if (mode.equals("ANGLESELECT") || mode.equals("VELOCITYSELECT")) {
     textSize(14);
     if (mode.equals("ANGLESELECT")) {
-      text("Set the initial launch angle of the projectile by clicking the up-down arrows", 10, 20);
+      text("Set the initial launch angle of the projectile by sliding the slider", 10, 20);
       text("Hit enter once you've selected your angle", 10, 40);
       text ("Angle is: "+ angle +" ˚", 10, 240);
     }
@@ -227,6 +227,7 @@ void mouseClicked() {
         p = new Planet(mouseX, mouseY, 0.8, "Pluto", .25, 248, gray);
         pluto=false;
       } else {
+        randcolor = color(rcolor.nextInt()%155+100, rcolor.nextInt()%155+100, rcolor.nextInt()%155+100);
         p = new Planet(mouseX, mouseY, radiussy/10, "Custom", massy, 45, randcolor); //have to choose interactively
         massy=0;
         radiussy=0;
@@ -254,6 +255,8 @@ void mouseClicked() {
   }
   if (simMode.equals("PROJECTILE")) {
     if (mouseX > width-100 && mouseX < width-10 && mouseY > 60 && mouseY < 110) { //Clear projectile screen
+      angle = 0;
+      velocity = 0;
       a = new Projectile(30, 730, velocity, angle);
       mode = "ANGLESELECT";
     }
