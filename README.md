@@ -1,6 +1,11 @@
 # FizKidz
 ## Final Project II
 
+
+## Project Description:
+
+## Directions:
+
 ### Development Log:
 
 **Weekend (5/18 - 5/19):**
@@ -34,6 +39,10 @@
 * Angelique: *Made it so that every planet in the planet simulation would have the proper corresponding color and the make-your-own had a randomly assigned color.*
 * Aditi: *Fixed the issue in the planetary orbit where planets jumped to the wrong coordinates when placed. Also started working more on the projectile motion model by setting up the correct parametric equations for move() and creating a basic template for display().*
 
-**Friday 5/31**
+**Friday 5/31:**
 * Angelique: *Worked on the background colors of the solar system (changed to black to look like outer space) and changing the button colors, while fixing merging errors. Also fixed planet sizing and tested the program on a school computer.*
 * Aditi: *Continued to fix the math of the projectile on paper and in the code.* 
+
+**Weekend 6/1 - 6/4:**
+* Angelique: *Worked on making the selection of variable values easier by adding sliders for eccentricity, radius, velocity, and angle. Also debugged an issue with the random color generation for custom planet selections.*
+* Aditi: *Debugged projectile motion so that velocity and angle updated immediately and so that the projectile moved in the proper parabolic motion. Also updated the menu screen and other text messages.*
