@@ -40,13 +40,18 @@ color randcolor = color(rcolor.nextInt()%255, rcolor.nextInt()%255, rcolor.nextI
 int slider=0;
 import java.util.*;
 ArrayList<Planet> planets = new ArrayList<Planet>(); //keep track of all planets
-
+interface Collidable{
+  boolean isTouching(Planet other);
+  void changeDisplay();
+}
 interface Displayable { 
   void display();
 }
 
 interface Moveable {
   void move();
+  float getX();
+  float getY();
 }
 
 ArrayList<Displayable> toDisplay;
@@ -101,9 +106,7 @@ void draw() {
       a.display();
       if (mode.equals("EXECUTING")) {
         a.move();}
-    }
-  }
-}
+    }}}
 
 void displaylaunch() {
   fill(255);

@@ -55,6 +55,15 @@ class Planet implements Displayable, Moveable {
   void setE(float ecc) {
     e = ecc;
   }
+  float getX(){
+    return xCor;
+  }
+  float getY(){
+    return yCor;
+  }
+   boolean isTouching(Planet other) {
+    return (dist(xCor,yCor,other.xCor,other.yCor) <=3*1));
+  }
   void findAngle() {
     if (xCor > sunX && yCor > sunY) { //works
       angle = atan(Math.abs((xCor - sunX)/(yCor - sunY)));

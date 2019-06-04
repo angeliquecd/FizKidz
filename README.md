@@ -36,4 +36,7 @@
 
 **Friday 5/31**
 * Angelique: *Worked on the background colors of the solar system (changed to black to look like outer space) and changing the button colors, while fixing merging errors. Also fixed planet sizing and tested the program on a school computer.*
-* Aditi: *Continued to fix the math of the projectile on paper and in the code.* 
+* Aditi: *Continued to fix the math of the projectile on paper and in the code.*
+
+**Monday 6/03**
+* Angelique: *Worked on changing the setup of the selectors by switching to sliders, which are easier to use. Fixed a bug with planet colors and started working on a colliding method for planets*
